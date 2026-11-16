@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nikita &amp; Ishan – Wedding games</title>
+<meta name="description" content="A Kerala backwater quiz, the Sangeet six, wedding predictions and blessings for Nikita and Ishan.">
+<meta property="og:title" content="Nikita &amp; Ishan – Wedding games">
+<meta property="og:description" content="Take the backwater quiz, pick your Sangeet six, make your wedding predictions and leave a blessing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Rozha+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0b2f30; --water:#0f4243; --water2:#18605f; --gold:#c9a227; --gold-hi:#f1dc94;
+  --page:#f8f2e2; --card:#fffcf3; --ink:#1c2921; --muted:#5a685e; --line:#e4d8b8;
+  --accent:#0f4243; --on-accent:#f7efd6; --nikita:#c2373a; --ishan:#1f5aa6; --ok:#2c7a44; --bad:#b23a2f;
+  --leaf:#e6cf92; --leaf-ink:#3a2e12; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --page:#0d1b19; --card:#152724; --ink:#eef0e5; --muted:#a3b2a8; --line:#29403a;
+    --accent:#d8b440; --on-accent:#1b1708; --nikita:#ff7a7c; --ishan:#80acf6; --ok:#74d08f; --bad:#ff8c7c;
+    --leaf:#cdb576; color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 Manjari,"Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Rozha One",Georgia,serif;font-weight:400;line-height:1.15;margin:0 0 .35em}
+h2{font-size:30px} h3{font-size:23px}
+p{margin:0 0 .8em}
+a{color:inherit}
+.wrap{max-width:600px;margin:0 auto;padding:0 18px}
+.small{font-size:14px;color:var(--muted)}
+.hidden{display:none!important}
+
+/* Hero: the backwaters at dusk, finished with a kasavu border */
+.hero{background:linear-gradient(#082425,var(--deep) 40%,var(--water) 75%,var(--water2));color:#f4ead0;text-align:center;padding:26px 0 0;border-bottom:8px double var(--gold);overflow:hidden}
+.hero .place{font-size:15px;letter-spacing:.02em;color:#d9cfa9;margin:0}
+.hero h1{font-size:clamp(44px,12vw,66px);color:var(--gold-hi);margin:.08em 0 .02em}
+.hero .dates{margin:0;font-size:17px}
+.countdown{display:inline-block;margin-top:12px;padding:4px 14px;border:1px solid rgba(241,220,148,.5);border-radius:999px;font-size:15px;color:var(--gold-hi)}
+.scene{display:block;width:100%;height:auto;margin-top:6px}
+.boat-bob{animation:bob 5s ease-in-out infinite;transform-origin:center}
+@keyframes bob{50%{transform:translateY(2px)}}
+
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--page);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 14px;scrollbar-width:none}
+nav.tabs a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:7px 13px;border-radius:999px;font-weight:700;font-size:15px}
+nav.tabs a.on{background:var(--accent);color:var(--on-accent)}
+
+section.view{display:none;padding:20px 0 70px}
+section.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.card.kasavu{border-top:6px double var(--gold)}
+.lead{font-size:18px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:700;border-radius:11px;border:1.5px solid var(--accent);background:transparent;color:var(--ink);padding:10px 16px;cursor:pointer;text-decoration:none;min-height:46px}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,.opt:focus-visible,.vote:focus-visible,.chip:focus-visible,nav a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.share{font-size:14px;min-height:38px;padding:6px 12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+label{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
+label .opt-l{font-weight:400;color:var(--muted)}
+input[type=text],input[type=search],textarea{width:100%;font:inherit;color:var(--ink);background:var(--page);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:4px}
+textarea{resize:vertical;min-height:120px}
+.chk{display:flex;gap:10px;align-items:center;font-weight:400}
+.chk input{width:20px;height:20px;accent-color:var(--accent)}
+
+/* Home tiles */
+.tile{display:block;text-decoration:none}
+.tile h3{margin-bottom:4px}
+.tile p{margin:0;color:var(--muted)}
+.tile .go{margin-top:10px;font-weight:700;color:var(--ink)}
+.tile:hover .card,.tile:focus-visible .card{border-color:var(--gold)}
+
+/* Team picker */
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.teampick{position:relative;border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;cursor:pointer;font-weight:700;background:var(--page)}
+.teampick input{position:absolute;opacity:0;pointer-events:none}
+.teampick.n{--t:var(--nikita)} .teampick.i{--t:var(--ishan)}
+.teampick:has(input:checked){border-color:var(--t);background:color-mix(in srgb,var(--t) 12%,var(--page))}
+.teampick:has(input:focus-visible){outline:3px solid var(--gold)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
+.dot.Nikita{background:var(--nikita)} .dot.Ishan{background:var(--ishan)}
+
+/* Quiz: the houseboat sails one stop per question */
+.river{position:relative;height:48px;margin:2px 4px 10px}
+.river::before{content:"";position:absolute;left:0;right:0;top:34px;height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--water2) 0 16px,#2c8582 16px 30px)}
+.stop{position:absolute;top:31px;width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--gold);transform:translateX(-50%)}
+.stop.done{background:var(--gold)}
+.river .boat{position:absolute;top:0;width:52px;transform:translateX(-50%);transition:left .7s ease}
+.qmeta{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.qtext{font-size:25px;margin:6px 0 12px}
+.timer{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-bottom:14px}
+.timer i{display:block;height:100%;width:100%;background:var(--gold)}
+.opts{display:grid;gap:9px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;font:inherit;color:var(--ink);background:var(--page);border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;min-height:54px}
+.opt b{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--gold);font-size:14px}
+.opt:hover{border-color:var(--gold)}
+.opt.picked{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--page))}
+.opt.picked b{background:var(--gold);color:#1b1708}
+.opt:disabled{cursor:default}
+.result{text-align:center}
+.bigscore{font:400 64px/1 "Rozha One",Georgia,serif;color:var(--gold)}
+.review li{margin-bottom:12px}
+.review .yes{color:var(--ok);font-weight:700} .review .no{color:var(--bad);font-weight:700}
+.review .fact{font-size:14px;color:var(--muted)}
+
+/* Leaderboard */
+.teambar{display:flex;height:40px;border-radius:10px;overflow:hidden;font-weight:700;font-size:14px;color:#fff;margin:8px 0 4px}
+.teambar span{display:flex;align-items:center;padding:0 10px;min-width:max-content;transition:flex .6s}
+.teambar .tn{background:#c2373a} .teambar .ti{background:#1f5aa6;justify-content:flex-end}
+ol.lb{list-style:none;margin:12px 0 0;padding:0}
+ol.lb li{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:8px 6px;border-bottom:1px solid var(--line)}
+ol.lb li.me{background:color-mix(in srgb,var(--gold) 18%,transparent);border-radius:8px}
+ol.lb .rk{font:400 18px "Rozha One",Georgia,serif;color:var(--muted);text-align:center}
+ol.lb li:nth-child(-n+3) .rk{color:var(--gold)}
+ol.lb .sc{font-weight:700}
+
+/* Sangeet six */
+.slots{display:grid;gap:7px;margin:10px 0}
+.slot{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;min-height:54px;padding:6px 6px 6px 4px;border-radius:10px;border:1.5px solid var(--line);background:var(--page)}
+.slot .n{font:400 18px "Rozha One",Georgia,serif;color:var(--gold);text-align:center}
+.slot.empty{border-style:dashed;color:var(--muted);font-size:15px}
+.slot .x{border:none;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer;padding:6px 10px;border-radius:8px}
+.slot .x:hover{color:var(--bad)}
+.status{font-weight:700;margin:4px 0}
+.status.ok{color:var(--ok)}
+details.card summary{cursor:pointer;list-style-position:outside}
+ol.songs{list-style:none;margin:10px 0 0;padding:0}
+ol.songs li{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line)}
+ol.songs li.nork{grid-template-columns:1fr auto}
+ol.songs li.flash{animation:flash 1.6s}
+@keyframes flash{0%,60%{background:color-mix(in srgb,var(--gold) 30%,transparent)}100%{background:transparent}}
+ol.songs .rk{font:400 20px "Rozha One",Georgia,serif;color:var(--muted);text-align:center}
+ol.songs li.top .rk{color:var(--gold)}
+.song-t{font-weight:700;line-height:1.3}
+.song-a{font-size:14px;color:var(--muted)}
+.badge{display:inline-block;vertical-align:middle;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--gold);color:#1b1708;margin-left:6px}
+.badge.mine{background:transparent;border:1px solid var(--gold);color:var(--ink)}
+.pickbtn{min-width:88px;min-height:44px;font:inherit;font-weight:700;font-size:15px;border:2px solid var(--line);border-radius:10px;background:var(--page);color:var(--ink);cursor:pointer}
+.pickbtn.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 24%,var(--page))}
+.pickbtn:disabled{opacity:.4;cursor:default}
+.pickbtn:focus-visible,.popt:focus-visible,.slot .x:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.picks{font-weight:700;font-size:14px;color:var(--muted);text-align:right;white-space:nowrap}
+
+/* Predictions */
+.chart{display:block;width:100%;height:auto;margin:8px 0 12px}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.chart .mid{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;opacity:.7}
+.chart text{fill:var(--muted);font-size:10px;font-family:Manjari,system-ui,sans-serif}
+.popts{display:grid;gap:8px}
+.popt{display:grid;grid-template-columns:12px 1fr auto;gap:2px 10px;align-items:center;text-align:left;width:100%;font:inherit;color:var(--ink);background:var(--page);border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.popt:hover:not(:disabled){border-color:var(--gold)}
+.popt .sw{width:12px;height:12px;border-radius:3px}
+.popt .pl{font-weight:700;line-height:1.3}
+.popt .pp{font:400 24px/1 "Rozha One",Georgia,serif}
+.popt .pay{grid-column:2/4;font-size:13px;color:var(--muted)}
+.popt.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.popt.on .pay{color:var(--ink);font-weight:700}
+.popt.win{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.popt.win .pay{color:var(--ok);font-weight:700}
+.popt:disabled{cursor:default}
+
+/* Blessings: palm-leaf manuscripts */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{font:inherit;font-weight:700;font-size:15px;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;background:var(--page);color:var(--ink);cursor:pointer}
+.chip[aria-checked=true]{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.wall{display:grid;gap:12px;margin-top:12px}
+.leaf{position:relative;background:linear-gradient(170deg,#efdca5,var(--leaf) 60%,#d9bd7c);color:var(--leaf-ink);border-radius:8px;padding:26px 18px 12px 34px;box-shadow:0 1px 0 rgba(58,46,18,.25)}
+.leaf::before{content:"";position:absolute;left:13px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--page);box-shadow:inset 0 1px 2px rgba(0,0,0,.35)}
+.leaf::after{content:"";position:absolute;inset:24px 12px auto 34px;height:1px;background:rgba(58,46,18,.18)}
+.leaf .msg{white-space:pre-wrap;font-size:17px;margin-bottom:6px}
+.leaf .from{font-size:14px;font-weight:700}
+.leaf .rel{font-weight:400}
+.leaf .tag{position:absolute;left:34px;top:7px;font-weight:700;letter-spacing:.02em;font-size:12px;opacity:.75}
+
+.demo{background:color-mix(in srgb,var(--gold) 22%,var(--page));border:1px dashed var(--gold);border-radius:10px;padding:10px 14px;font-size:14px;margin-top:14px}
+.loading{display:flex;gap:10px;align-items:center;color:var(--muted);padding:12px 0}
+.loading::before{content:"";width:18px;height:18px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--gold);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(1turn)}}
+.err{color:var(--bad)}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:var(--ink);color:var(--page);padding:12px 18px;border-radius:12px;max-width:min(92vw,520px);font-size:15px;z-index:50;transition:transform .3s;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#toast.show{transform:translate(-50%,0);visibility:visible}
+dialog{border:none;border-radius:16px;padding:0;width:min(440px,92vw);background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(8,36,37,.6)}
+dialog .in{padding:20px}
+footer{text-align:center;padding:10px 0 40px;font-size:14px;color:var(--muted)}
+footer button{background:none;border:none;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="place">Kumarakom, Kerala</p>
+    <h1>Nikita &amp; Ishan</h1>
+    <p class="dates">20 &amp; 21 December 2026</p>
+    <span class="countdown" id="countdown"></span>
+  </div>
+  <svg class="scene" viewBox="0 0 400 120" aria-hidden="true">
+    <circle cx="300" cy="62" r="20" fill="#e9b949" opacity=".85"/>
+    <!-- far shore -->
+    <path d="M0 78 Q60 70 120 76 T240 74 T400 76 V90 H0Z" fill="#0a2d2c"/>
+    <!-- palms left -->
+    <g fill="none" stroke="#071f1f" stroke-linecap="round">
+      <path d="M42 92 Q46 60 38 34" stroke-width="3.5"/>
+      <path d="M38 34 Q22 30 10 40 M38 34 Q30 20 16 18 M38 34 Q44 18 58 16 M38 34 Q56 28 66 40 M38 34 Q50 36 56 50 M38 34 Q26 40 24 54" stroke-width="2.5"/>
+      <path d="M70 92 Q66 66 74 48" stroke-width="3"/>
+      <path d="M74 48 Q62 44 54 52 M74 48 Q68 36 58 34 M74 48 Q80 34 92 34 M74 48 Q88 46 94 56 M74 48 Q84 52 86 62" stroke-width="2.2"/>
+    </g>
+    <!-- palms right -->
+    <g fill="none" stroke="#071f1f" stroke-linecap="round">
+      <path d="M360 92 Q356 62 364 38" stroke-width="3.5"/>
+      <path d="M364 38 Q348 34 338 44 M364 38 Q354 24 342 22 M364 38 Q372 22 386 22 M364 38 Q380 34 392 44 M364 38 Q376 42 380 56 M364 38 Q352 44 350 58" stroke-width="2.5"/>
+    </g>
+    <!-- water -->
+    <rect x="0" y="88" width="400" height="32" fill="#14504f"/>
+    <path d="M20 98 h30 M90 104 h40 M180 99 h26 M250 106 h34 M320 100 h30 M60 112 h24 M220 114 h30" stroke="#3d8a86" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M285 96 h30 M292 102 h16" stroke="#e9b949" stroke-width="1.5" opacity=".6" stroke-linecap="round"/>
+    <!-- kettuvallam -->
+    <g class="boat-bob">
+      <path d="M128 90 Q200 104 272 88 L264 84 Q200 96 136 84Z" fill="#3a1f10"/>
+      <path d="M142 85 Q200 52 258 85Z" fill="#c79a4b"/>
+      <path d="M152 82 Q200 60 248 82" fill="none" stroke="#8a6227" stroke-width="1.4"/>
+      <path d="M164 80 Q200 66 236 80" fill="none" stroke="#8a6227" stroke-width="1.2"/>
+      <rect x="182" y="78" width="7" height="6" rx="1" fill="#f1dc94"/>
+      <rect x="196" y="77" width="7" height="7" rx="1" fill="#f1dc94"/>
+      <rect x="210" y="78" width="7" height="6" rx="1" fill="#f1dc94"/>
+    </g>
+  </svg>
+</header>
+
+<nav class="tabs" aria-label="Activities"><div class="wrap">
+  <a href="#home" data-v="home">Home</a>
+  <a href="#quiz" data-v="quiz">Backwater quiz</a>
+  <a href="#songs" data-v="songs">Sangeet six</a>
+  <a href="#predict" data-v="predict">Predictions</a>
+  <a href="#blessings" data-v="blessings">Blessings</a>
+</div></nav>
+
+<main class="wrap">
+  <div id="demoNote" class="demo hidden">Preview mode: everything is saved on this phone only, with a few sample entries. Paste your Google Script link into <code>API_URL</code> to go live.</div>
+
+  <section class="view" id="v-home">
+    <p class="lead">Welcome aboard! While we count down to Kumarakom, here are four ways to join in from your phone.</p>
+    <a class="tile" href="#quiz"><div class="card kasavu">
+      <h3>The backwater quiz</h3>
+      <p>Ten stops along the backwaters. Some questions are about Kerala, some about the two of us. Answer fast for bonus points and climb the leaderboard.</p>
+      <div class="go">Board the houseboat</div>
+    </div></a>
+    <a class="tile" href="#songs"><div class="card kasavu">
+      <h3>The Sangeet six</h3>
+      <p>Pick the six songs you think everyone else will pick. The most popular six go to the DJ, and whoever matches them best wins.</p>
+      <div class="go">Pick your six</div>
+    </div></a>
+    <a class="tile" href="#predict"><div class="card kasavu">
+      <h3>Wedding predictions</h3>
+      <p>Who cries first? Who's last on the dance floor? Make your calls and watch the odds move. Backing an early underdog pays the most.</p>
+      <div class="go">Make your predictions</div>
+    </div></a>
+    <a class="tile" href="#blessings"><div class="card kasavu">
+      <h3>Blessings for the couple</h3>
+      <p>Leave a blessing, a wish or your best marriage advice. We'll keep every one.</p>
+      <div class="go">Write a message</div>
+    </div></a>
+  </section>
+
+  <section class="view" id="v-quiz">
+    <div class="row" style="justify-content:space-between"><h2>The backwater quiz</h2><a class="btn share" data-share="quiz" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+    <div id="quizBox"></div>
+    <div id="quizLb"></div>
+  </section>
+
+  <section class="view" id="v-songs">
+    <div class="row" style="justify-content:space-between"><h2>The Sangeet six</h2><a class="btn share" data-share="songs" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+    <p>Pick the six songs you think <em>everyone else</em> will pick. Nobody can see what's popular until the reveal at the Sangeet. Then the six most-picked songs become the official Sangeet six, and whoever matched them best wins. Ties go to whoever locked in first.</p>
+    <div id="songsBox"></div>
+  </section>
+
+  <section class="view" id="v-predict">
+    <div class="row" style="justify-content:space-between"><h2>Wedding predictions</h2><a class="btn share" data-share="predict" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+    <p>Every question starts at even odds and moves as guests make their calls. Your points are set by the odds at the moment you pick, so backing an underdog early pays the most. You can change your mind until predictions close, but your points reset to the new odds.</p>
+    <div id="predictBox"></div>
+  </section>
+
+  <section class="view" id="v-blessings">
+    <div class="row" style="justify-content:space-between"><h2>Blessings for the couple</h2><a class="btn share" data-share="blessings" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+    <div id="blessBox"></div>
+    <div id="wallBox"></div>
+  </section>
+</main>
+
+<footer><span id="whoami"></span></footer>
+
+<dialog id="profileDlg" aria-labelledby="profTitle"><form class="in" method="dialog" id="profileForm">
+  <h3 id="profTitle">Who's joining in?</h3>
+  <p class="small">Your name shows on the leaderboard and next to your songs.</p>
+  <label for="pName">Your name</label>
+  <input type="text" id="pName" maxlength="40" autocomplete="name" required>
+  <label>Which side are you on?</label>
+  <div class="teams">
+    <label class="teampick n"><input type="radio" name="team" value="Nikita" required><span class="dot Nikita"></span>Team Nikita</label>
+    <label class="teampick i"><input type="radio" name="team" value="Ishan"><span class="dot Ishan"></span>Team Ishan</label>
+  </div>
+  <p class="err small hidden" id="pErr">Add your name and pick a team.</p>
+  <div class="row" style="margin-top:16px;justify-content:flex-end">
+    <button type="button" class="btn" id="pCancel">Cancel</button>
+    <button type="submit" class="btn primary">Save</button>
+  </div>
+</form></dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   SETTINGS – the only part you need to edit
+   ===================================================================== */
+const CONFIG = {
+  API_URL: 'https://script.google.com/macros/s/AKfycbyUR6-IERxPaFRnaJGeTLtLyxCxI54nOg6ZdJkLUoyXRf0uaQ6PgC7Gv82UFlF4pdxr/exec',       // paste your Google Apps Script web app URL here (ends in /exec)
+  SITE_URL: '',      // optional: your GitHub Pages link, used in WhatsApp share messages
+  BRIDE: 'Nikita',
+  GROOM: 'Ishan',
+  FIRST_EVENT: '2026-12-20T10:00:00+05:30', // for the countdown
+};
+
+/* Questions used in preview mode only. When live, questions come from the Quiz tab of your sheet. */
+const DEMO_QUIZ = [
+  {q:"What's the traditional name for a Kerala houseboat?",options:['Shikara','Kettuvallam','Chundan vallam','Catamaran'],answer:1,fact:"'Kettu' means tied: these boats were built by lashing planks together with coir rope, without nails."},
+  {q:'Who made the first move?',options:['Nikita','Ishan','A friend set them up','Still being debated'],answer:0,fact:''},
+  {q:'Kumarakom sits on the shore of which lake?',options:['Vembanad','Ashtamudi','Dal','Chilika'],answer:0,fact:"Vembanad is India's longest lake and stretches across three districts of Kerala."},
+  {q:'Who takes longer to get ready?',options:['Nikita','Ishan','Both, equally!'],answer:0,fact:''},
+  {q:"What's the grand feast served on a banana leaf called?",options:['Thali','Sadya','Pongal','Bhojanam'],answer:1,fact:'A full sadya can have more than 20 dishes, eaten by hand, with payasam as the sweet finale.'},
+  {q:'On a houseboat with no Wi-Fi, who gets restless first?',options:['Nikita','Ishan','Both, within an hour',"Neither, they'd love it"],answer:0,fact:''},
+  {q:'The ivory saree with a gold border worn at Kerala weddings is called…',options:['Banarasi','Kanjeevaram','Kasavu','Paithani'],answer:2,fact:"Kasavu is the gold zari border. The same weave is used for the men's mundu."},
+  {q:'What would Ishan reach for first at a sadya?',options:['Payasam','Avial','Pappadam','Banana chips'],answer:0,fact:''},
+  {q:'Which Kerala dance-drama is known for its elaborate green face make-up?',options:['Mohiniyattam','Kathakali','Bharatanatyam','Kuchipudi'],answer:1,fact:"Kathakali artists spend hours in make-up. The green 'pacha' face marks the noble hero."},
+  {q:"Who said 'I love you' first?",options:['Nikita','Ishan','They said it together','It was sent by text!'],answer:0,fact:''},
+];
+
+/* ---------- Small helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mem={};
+const store={
+  get(k){ try{ return localStorage.getItem(k); }catch(_){ return k in mem?mem[k]:null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(_){ mem[k]=v; } },
+};
+const readJSON=k=>{ try{ return JSON.parse(store.get(k)||'null'); }catch(_){ return null; } };
+let DEVICE=store.get('wed_device');
+if(!DEVICE){ DEVICE='g'+Math.random().toString(36).slice(2,10)+Date.now().toString(36); store.set('wed_device',DEVICE); }
+const loading=t=>`<div class="loading">${esc(t)}</div>`;
+let toastTimer;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3800); }
+function errorCard(el,err,retry){
+  el.innerHTML=`<div class="card"><p class="err">${esc(err.message||'Something went wrong.')}</p><p class="small">Check your connection and try again.</p><button class="btn" type="button">Try again</button></div>`;
+  el.querySelector('button').onclick=retry;
+}
+const siteURL=()=>CONFIG.SITE_URL||location.href.split('#')[0];
+const wa=text=>'https://wa.me/?text='+encodeURIComponent(text);
+const COUPLE=`${CONFIG.BRIDE} & ${CONFIG.GROOM}`;
+
+/* ---------- Talking to the Google Sheet ---------- */
+const demoApi=CONFIG.API_URL?null:makeDemo();
+async function api(action,payload={}){
+  const body={action,device:DEVICE,...payload};
+  if(!CONFIG.API_URL) return demoApi(body);
+  let res;
+  try{ res=await fetch(CONFIG.API_URL,{method:'POST',body:JSON.stringify(body)}); }
+  catch(_){ throw new Error("Couldn't reach the wedding server."); }
+  const j=await res.json().catch(()=>({ok:false,error:'The server sent an unexpected reply.'}));
+  if(!j.ok) throw new Error(j.error||'Something went wrong.');
+  return j;
+}
+
+/* ---------- Guest profile ---------- */
+const getProfile=()=>readJSON('wed_profile');
+function renderWho(){ const p=getProfile(); $('#whoami').innerHTML=p?`Playing as ${esc(p.name)}${p.team?`, Team ${esc(p.team)}`:''}. <button type="button" id="changeMe">Change</button>`:''; const b=$('#changeMe'); if(b) b.onclick=()=>openProfile(()=>{}); }
+let profileCb=null;
+function openProfile(cb){
+  const p=getProfile()||{}; profileCb=cb;
+  $('#pName').value=p.name||''; $('#pErr').classList.add('hidden');
+  document.querySelectorAll('#profileForm input[name=team]').forEach(r=>r.checked=r.value===p.team);
+  $('#profileDlg').showModal(); setTimeout(()=>$('#pName').focus(),30);
+}
+function needProfile(cb){ const p=getProfile(); if(p&&p.name&&p.team) cb(p); else openProfile(cb); }
+$('#profileForm').addEventListener('submit',e=>{
+  const name=$('#pName').value.replace(/\s+/g,' ').trim(), team=(document.querySelector('#profileForm input[name=team]:checked')||{}).value;
+  if(!name||!team){ e.preventDefault(); $('#pErr').classList.remove('hidden'); return; }
+  const p={name,team}; store.set('wed_profile',JSON.stringify(p)); renderWho();
+  const cb=profileCb; profileCb=null; if(cb) setTimeout(()=>cb(p),0);
+});
+$('#pCancel').onclick=()=>{ profileCb=null; $('#profileDlg').close(); };
+
+/* ---------- Routing ---------- */
+const loaded={};
+function route(){
+  let v=location.hash.slice(1)||'home'; if(!['home','quiz','songs','predict','blessings'].includes(v)) v='home';
+  document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  if(v==='quiz'&&!loaded.quiz){ loaded.quiz=1; loadQuiz(); }
+  if(v==='songs'){ loadSongs(!loaded.songs); loaded.songs=1; }
+  if(v==='predict'){ loadPredict(!loaded.predict); loaded.predict=1; }
+  if(v==='blessings'&&!loaded.bless){ loaded.bless=1; renderBlessForm(); loadWall(); }
+}
+window.addEventListener('hashchange',()=>{ route(); window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'smooth'}); });
+
+/* =====================================================================
+   THE BACKWATER QUIZ
+   ===================================================================== */
+const Q={questions:[],i:0,answers:[],times:[],t0:0,seconds:20,locked:false,open:true};
+const boatSVG=`<svg class="boat" viewBox="0 0 52 30" aria-hidden="true"><path d="M2 22 Q26 30 50 21 L47 19 Q26 25 5 19Z" fill="#3a1f10"/><path d="M8 19.5 Q26 4 44 19.5Z" fill="#c79a4b"/><path d="M12 18 Q26 8 40 18" fill="none" stroke="#8a6227" stroke-width="1"/><rect x="21" y="15" width="3" height="3" fill="#f1dc94"/><rect x="27" y="15" width="3" height="3" fill="#f1dc94"/></svg>`;
+function river(i,n){
+  const pos=k=>n>1?4+k*(92/(n-1)):50;
+  return `<div class="river">${Array.from({length:n},(_,k)=>`<span class="stop ${k<i?'done':''}" style="left:${pos(k)}%"></span>`).join('')}<span id="boatPos" style="position:absolute;left:${pos(Math.max(0,i-1))}%;top:0;width:0">${boatSVG}</span></div>`;
+}
+function titleFor(pct){
+  if(pct>=.9) return 'Captain of the Kettuvallam';
+  if(pct>=.7) return 'Snake Boat Champion';
+  if(pct>=.5) return 'Seasoned Backwater Explorer';
+  if(pct>=.3) return 'Happy Houseboat Passenger';
+  return 'Lost Among the Coconut Palms';
+}
+async function loadQuiz(){
+  const box=$('#quizBox'); box.innerHTML=loading('Getting the houseboat ready…');
+  try{
+    const r=await api('quiz');
+    Q.questions=r.questions; Q.seconds=r.seconds||20; Q.open=r.open!==false;
+    if(r.done){ const saved=readJSON('wed_quiz')||{}; showResult(r.done,r.review||saved.review,saved.answers,true); }
+    else quizIntro();
+  }catch(e){ errorCard(box,e,loadQuiz); }
+}
+function quizIntro(){
+  const n=Q.questions.length;
+  if(!Q.open){ $('#quizBox').innerHTML=`<div class="card kasavu"><h3>The quiz has closed</h3><p>Thank you for playing! Here's how everyone did.</p></div>`; renderLeaderboard(); return; }
+  $('#quizBox').innerHTML=`<div class="card kasavu">
+    ${river(0,n)}
+    <p class="lead">${n} stops along the backwaters. Some questions are about Kerala, some are about ${esc(CONFIG.BRIDE)} and ${esc(CONFIG.GROOM)}.</p>
+    <p>Every right answer is worth 100 points, plus up to 50 more if you answer within ${Q.seconds} seconds. You get one go, so make it count!</p>
+    <button class="btn primary wide" id="startQuiz" type="button">Board the houseboat</button>
+  </div>`;
+  $('#startQuiz').onclick=()=>needProfile(()=>{ Q.i=0; Q.answers=[]; Q.times=[]; renderQ(); });
+  renderLeaderboard();
+}
+function renderQ(){
+  const n=Q.questions.length, q=Q.questions[Q.i]; Q.locked=false;
+  $('#quizLb').innerHTML='';
+  $('#quizBox').innerHTML=`<div class="card kasavu">
+    ${river(Q.i,n)}
+    <div class="qmeta"><span>Stop ${Q.i+1} of ${n}</span><span id="qClock">${Q.seconds}s bonus</span></div>
+    <h3 class="qtext" id="qText" tabindex="-1">${esc(q.q)}</h3>
+    <div class="timer"><i id="tbar"></i></div>
+    <div class="opts">${q.options.map((o,j)=>`<button class="opt" type="button" data-j="${j}"><b>${'ABCD'[j]}</b><span>${esc(o)}</span></button>`).join('')}</div>
+  </div>`;
+  // sail the boat to this stop
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const pos=n>1?4+Q.i*(92/(n-1)):50; $('#boatPos').style.left=pos+'%';
+    const bar=$('#tbar'); bar.style.transition=`width ${Q.seconds}s linear`; bar.style.width='0%';
+  }));
+  Q.t0=performance.now();
+  clearInterval(Q.clock);
+  Q.clock=setInterval(()=>{ const left=Math.max(0,Q.seconds-Math.floor((performance.now()-Q.t0)/1000)); const c=$('#qClock'); if(c) c.textContent=left?`${left}s bonus`:'No bonus, still answer!'; },250);
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.j,b));
+  $('#qText').focus({preventScroll:true});
+}
+function pick(j,btn){
+  if(Q.locked) return; Q.locked=true; clearInterval(Q.clock);
+  Q.times[Q.i]=Math.round(performance.now()-Q.t0); Q.answers[Q.i]=j;
+  btn.classList.add('picked'); document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const bar=$('#tbar'); bar.style.width=getComputedStyle(bar).width; bar.style.transition='none';
+  setTimeout(()=>{ Q.i++; if(Q.i<Q.questions.length) renderQ(); else submitQuiz(); },550);
+}
+async function submitQuiz(){
+  const box=$('#quizBox'); box.innerHTML=`<div class="card kasavu">${river(Q.questions.length,Q.questions.length)}${loading('Docking at the jetty and counting your points…')}</div>`;
+  const p=getProfile()||{};
+  try{
+    const r=await api('submitQuiz',{name:p.name,team:p.team,answers:Q.answers,times:Q.times});
+    store.set('wed_quiz',JSON.stringify({result:r.result,review:r.review,answers:Q.answers}));
+    showResult(r.result,r.review,Q.answers,r.already);
+  }catch(e){ errorCard(box,e,submitQuiz); }
+}
+function showResult(res,review,answers,already){
+  const pct=res.total?res.correct/res.total:0, title=titleFor(pct);
+  const shareText=`I scored ${res.score} points on ${COUPLE}'s backwater quiz and I'm a "${title}"! Think you know them better? ${siteURL()}#quiz`;
+  let rev='';
+  if(review&&answers&&answers.length){
+    rev=`<div class="card"><h3>How you did</h3><ol class="review">${Q.questions.map((q,i)=>{
+      const a=answers[i], c=review[i]?review[i].answer:-1, ok=a===c;
+      return `<li><div><strong>${esc(q.q)}</strong></div>
+        <div class="${ok?'yes':'no'}">${ok?'✓':'✗'} You said: ${esc(q.options[a]??'No answer')}</div>
+        ${ok||c<0?'':`<div>Answer: ${esc(q.options[c])}</div>`}
+        ${review[i]&&review[i].fact?`<div class="fact">${esc(review[i].fact)}</div>`:''}</li>`;}).join('')}</ol></div>`;
+  }
+  $('#quizBox').innerHTML=`<div class="card kasavu result">
+    <p class="small">${already?"You've already sailed this quiz. Here's your result.":'You made it to the jetty!'}</p>
+    <div class="bigscore">${res.score}</div><div class="small">points</div>
+    <h3 style="margin-top:10px">${esc(title)}</h3>
+    <p>${res.correct} of ${res.total} correct</p>
+    <a class="btn primary wide" href="${wa(shareText)}" target="_blank" rel="noopener">Share your score on WhatsApp</a>
+  </div>${rev}`;
+  renderLeaderboard();
+}
+async function renderLeaderboard(){
+  const el=$('#quizLb'); el.innerHTML=`<div class="card"><h3>Leaderboard</h3>${loading('Loading scores…')}</div>`;
+  try{
+    const r=await api('leaderboard');
+    const t=r.teams||{}, n=t.Nikita||{players:0,total:0}, i=t.Ishan||{players:0,total:0};
+    const an=n.players?Math.round(n.total/n.players):0, ai=i.players?Math.round(i.total/i.players):0;
+    el.innerHTML=`<div class="card">
+      <div class="row" style="justify-content:space-between"><h3 style="margin:0">Leaderboard</h3><button class="btn share" type="button" id="lbRefresh">Refresh</button></div>
+      <div class="teambar" role="img" aria-label="Team ${esc(CONFIG.BRIDE)} averages ${an} points, Team ${esc(CONFIG.GROOM)} averages ${ai} points">
+        <span class="tn" style="flex:${an||1}">Team ${esc(CONFIG.BRIDE)} ${an}</span><span class="ti" style="flex:${ai||1}">${ai} Team ${esc(CONFIG.GROOM)}</span>
+      </div>
+      <p class="small">Average points per player: ${n.players} on Team ${esc(CONFIG.BRIDE)}, ${i.players} on Team ${esc(CONFIG.GROOM)}.</p>
+      ${r.top.length?`<ol class="lb">${r.top.map((p,k)=>`<li class="${p.me?'me':''}"><span class="rk">${p.rank||k+1}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}</span><span class="sc">${p.score}</span></li>`).join('')}</ol>`:'<p>No scores yet. Be the first on the board!</p>'}
+      ${r.players>r.top.length?`<p class="small" style="margin-top:8px">${r.players} guests have played.</p>`:''}
+    </div>`;
+    $('#lbRefresh').onclick=renderLeaderboard;
+  }catch(e){ errorCard(el,e,renderLeaderboard); }
+}
+
+/* =====================================================================
+   SANGEET SIX: pick a lineup, match the crowd
+   ===================================================================== */
+let S=null, songQuery='', pendingPicks=null, saving=false;
+const NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
+const numWord=n=>NUM[n]||String(n);
+const fmtTime=t=>new Date(t).toLocaleString(undefined,{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+async function loadSongs(first){
+  const box=$('#songsBox'); if(first) box.innerHTML=loading('Tuning the dhol…');
+  try{ const r=await api('songs'); if(!saving&&!pendingPicks){ S=r; renderSongs(); } }
+  catch(e){ if(first) errorCard(box,e,()=>loadSongs(true)); else toast(e.message); }
+}
+function statusText(){
+  const n=S.myPicks.length, size=S.size;
+  if(saving||pendingPicks) return 'Saving…';
+  if(n>=size) return S.lockedAt?`Locked in ${fmtTime(S.lockedAt)}.${S.open?' Changing a song resets your lock-in time.':''}`:'Locked in.';
+  if(S.open) return n?`Pick ${size-n} more to enter.`:`Pick ${numWord(size)} songs to enter.`;
+  return "Your lineup wasn't complete when the battle closed, so it isn't in the running.";
+}
+function renderSongs(){
+  const size=S.size, mine=S.myPicks, byId=Object.fromEntries(S.songs.map(s=>[s.id,s]));
+  let h=S.reveal?songResultsHTML():'';
+  h+=`<div class="card kasavu">
+    <h3>Your Sangeet ${numWord(size)}</h3>
+    <div class="slots">${Array.from({length:size},(_,i)=>{ const s=byId[mine[i]];
+      return s?`<div class="slot"><span class="n">${i+1}</span><div><div class="song-t">${esc(s.title)}</div>${s.artist?`<div class="song-a">${esc(s.artist)}</div>`:''}</div>${S.open?`<button class="x" type="button" data-rm="${esc(s.id)}" aria-label="Remove ${esc(s.title)}">×</button>`:'<span></span>'}</div>`
+        :`<div class="slot empty"><span class="n">${i+1}</span><span>${S.open?'Pick a song from the list below':'Empty'}</span><span></span></div>`; }).join('')}</div>
+    <p class="status ${mine.length>=size&&!saving?'ok':''}" id="lineupStatus">${esc(statusText())}</p>
+    <p class="small" style="margin:0">${S.entries} ${S.entries===1?'guest has':'guests have'} entered a full lineup.</p>
+  </div>`;
+  if(S.open) h+=`<details class="card"><summary><h3 style="display:inline">Can't find your song? Add it</h3></summary>
+      <label for="sTitle">Song</label><input type="text" id="sTitle" maxlength="80" placeholder="e.g. London Thumakda">
+      <label for="sArtist">Film or artist <span class="opt-l">(optional)</span></label><input type="text" id="sArtist" maxlength="80" placeholder="e.g. Queen">
+      <button class="btn primary wide" type="button" id="sAdd" style="margin-top:14px">Add to the list</button>
+      <p class="small" style="margin:8px 0 0">You can add up to ${S.maxSuggestions} songs. You've added ${S.mySuggestions}.</p>
+    </details>`;
+  else if(!S.reveal) h+=`<div class="card"><h3>Lineups are locked</h3><p>The official Sangeet ${numWord(size)} will be revealed at the Sangeet!</p></div>`;
+  h+=`<h3 style="margin-top:22px">${S.reveal?'Every song, by picks':'All songs'}</h3>
+    <div class="row"><input type="search" id="sSearch" placeholder="Search songs" value="${esc(songQuery)}" style="flex:1;margin:0" aria-label="Search songs"><button class="btn share" type="button" id="sRefresh">Refresh</button></div>
+    <ol class="songs" id="songList"></ol>`;
+  $('#songsBox').innerHTML=h;
+  renderSongList();
+  document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>togglePick(b.dataset.rm));
+  $('#sSearch').oninput=e=>{ songQuery=e.target.value; renderSongList(); };
+  $('#sRefresh').onclick=()=>loadSongs(false);
+  if(S.open){ $('#sAdd').onclick=addSong; $('#sTitle').onkeydown=$('#sArtist').onkeydown=e=>{ if(e.key==='Enter') addSong(); }; }
+}
+function renderSongList(flashId){
+  const q=songQuery.trim().toLowerCase(), mine=new Set(S.myPicks), full=S.myPicks.length>=S.size, top=new Set(S.topIds||[]);
+  const list=S.songs.map((s,k)=>({...s,rank:k+1})).filter(s=>!q||(s.title+' '+s.artist).toLowerCase().includes(q));
+  $('#songList').innerHTML=list.length?list.map(s=>{ const on=mine.has(s.id);
+    const right=S.reveal?`<span class="picks">${s.picks} ${s.picks===1?'pick':'picks'}</span>`
+      :S.open?`<button class="pickbtn ${on?'on':''}" type="button" data-id="${esc(s.id)}" ${!on&&full?'disabled':''} aria-pressed="${on}">${on?'✓ Picked':'+ Pick'}</button>`
+      :(on?'<span class="picks">Your pick</span>':'<span></span>');
+    return `<li data-id="${esc(s.id)}" class="${S.reveal?'':'nork'} ${top.has(s.id)?'top':''} ${s.id===flashId?'flash':''}">
+      ${S.reveal?`<span class="rk">${s.rank}</span>`:''}
+      <div><div class="song-t">${esc(s.title)}${top.has(s.id)?'<span class="badge">Top</span>':''}${S.reveal&&on?'<span class="badge mine">Yours</span>':''}</div><div class="song-a">${s.artist?esc(s.artist)+', ':''}${s.team?`<span class="dot ${esc(s.team)}"></span>`:''}added by ${esc(s.by)}</div></div>
+      ${right}</li>`; }).join('')
+    :`<li style="display:block">${S.songs.length?'No songs match your search.':'No songs yet. Add the first one!'}</li>`;
+  document.querySelectorAll('#songList .pickbtn').forEach(b=>b.onclick=()=>togglePick(b.dataset.id));
+  if(full&&S.open&&!q&&!flashId) {} // keep quiet
+  if(flashId){ const li=document.querySelector(`#songList li[data-id="${CSS.escape(flashId)}"]`); if(li) li.scrollIntoView({block:'center',behavior:'smooth'}); }
+}
+function songResultsHTML(){
+  const top=S.songs.filter(s=>S.topIds.includes(s.id)), me=S.myResult, size=S.size;
+  return `<div class="card kasavu">
+      <h3>The official Sangeet ${numWord(size)}</h3>
+      <p class="small">The songs picked most often across ${S.players} ${S.players===1?'lineup':'lineups'}.${top.length>size?' Some songs tied for the last spot, so they all count.':''}</p>
+      ${top.length?`<ol class="lb">${top.map((s,k)=>`<li class="${S.myPicks.includes(s.id)?'me':''}"><span class="rk">${k+1}</span><span><strong>${esc(s.title)}</strong>${s.artist?`<div class="small">${esc(s.artist)}</div>`:''}</span><span class="sc">${s.picks}</span></li>`).join('')}</ol>`:'<p>No lineups were entered.</p>'}
+    </div>
+    <div class="card">
+      <h3>Lineup leaderboard</h3>
+      ${me?`<p>You matched <strong>${me.matches} of ${size}</strong> and finished <strong>#${me.rank}</strong> of ${S.players}.</p>`:''}
+      ${S.board.length?`<ol class="lb">${S.board.map(p=>`<li class="${p.me?'me':''}"><span class="rk">${p.rank}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}<div class="small">${p.points} popularity points</div></span><span class="sc">${p.matches}/${size}</span></li>`).join('')}</ol>`:''}
+      <p class="small" style="margin-top:10px">Ranked by songs matched, then by how popular all your picks were, then by who locked in first.</p>
+    </div>`;
+}
+function togglePick(id){
+  if(!S.open) return;
+  needProfile(()=>{
+    const cur=S.myPicks.slice(), i=cur.indexOf(id);
+    if(i>=0) cur.splice(i,1);
+    else{ if(cur.length>=S.size){ toast('Your lineup is full. Remove a song first.'); return; } cur.push(id); }
+    setPicks(cur);
+  });
+}
+function setPicks(p){ const wasFull=S.myPicks.length>=S.size; S.myPicks=p; S.lockedAt=null; pendingPicks=p; renderSongs(); flushPicks(wasFull); }
+async function flushPicks(wasFull){
+  if(saving) return; saving=true;
+  while(pendingPicks){
+    const p=pendingPicks; pendingPicks=null; const prof=getProfile()||{};
+    try{ const r=await api('saveLineup',{picks:p,name:prof.name,team:prof.team}); if(!pendingPicks) S=r; }
+    catch(e){ toast(e.message); pendingPicks=null; saving=false; await loadSongs(false); return; }
+  }
+  saving=false; renderSongs();
+  if(!wasFull&&S.myPicks.length>=S.size) toast(`Your Sangeet ${numWord(S.size)} is locked in! 🪔`);
+}
+function addSong(){
+  const title=$('#sTitle').value.trim(), artist=$('#sArtist').value.trim();
+  if(!title){ toast('Add the name of the song first.'); $('#sTitle').focus(); return; }
+  needProfile(async p=>{
+    const b=$('#sAdd'); b.disabled=true; b.textContent='Adding…';
+    try{
+      const r=await api('suggestSong',{title,artist,name:p.name,team:p.team}); S=r; songQuery='';
+      const id=r.duplicate||r.added;
+      if(!r.duplicate&&S.myPicks.length<S.size){ setPicks([...S.myPicks,id]); toast('Added to the list and to your lineup!'); }
+      else{ renderSongs(); toast(r.duplicate?"That song is already on the list. Here it is!":'Added to the list!'); }
+      renderSongList(id);
+    }catch(e){ toast(e.message); b.disabled=false; b.textContent='Add to the list'; }
+  });
+}
+setInterval(()=>{ if(location.hash==='#songs'&&S&&document.visibilityState==='visible'&&!document.activeElement.matches('input')) loadSongs(false); },45000);
+
+/* =====================================================================
+   WEDDING PREDICTIONS: a tiny prediction market
+   ===================================================================== */
+let P=null;
+const PCOL=['#c9a227','#c2373a','#1f5aa6','#2f8a4e'];
+async function loadPredict(first){
+  const box=$('#predictBox'); if(first) box.innerHTML=loading('Reading the stars…');
+  try{ P=await api('predictions'); renderPredict(); }
+  catch(e){ if(first) errorCard(box,e,()=>loadPredict(true)); else toast(e.message); }
+}
+function payoutFor(q,k){
+  const c=q.counts.slice(); if(q.myPick>=0) c[q.myPick]--;
+  const n=q.options.length, tot=c.reduce((a,b)=>a+b,0), den=tot+P.weight*n;
+  const p=Math.max(.01,den?(c[k]+P.weight)/den:1/n);
+  return Math.min(1000,Math.round(100/p));
+}
+function chartSVG(q){
+  const h=q.history; if(!h||h.length<2) return '';
+  const W=340,H=150,L=34,R=12,T=8,B=20, t0=h[0][0], t1=Math.max(h[h.length-1][0],t0+1);
+  const X=t=>L+(t-t0)/(t1-t0)*(W-L-R), Y=p=>T+(1-p)*(H-T-B);
+  const grid=[0,.25,.5,.75,1].map(v=>`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" class="${v===.5?'mid':'gl'}"/><text x="${L-6}" y="${Y(v)+3.5}" text-anchor="end">${v*100}%</text>`).join('');
+  const lines=q.options.map((_,k)=>{ let d=''; h.forEach((pt,i)=>{ const x=X(pt[0]).toFixed(1), y=Y(pt[k+1]).toFixed(1); d+=i?`H${x}V${y}`:`M${x} ${y}`; });
+    const last=h[h.length-1]; return `<path d="${d}" fill="none" stroke="${PCOL[k]}" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${X(last[0])}" cy="${Y(last[k+1])}" r="3.5" fill="${PCOL[k]}"/>`; }).reverse().join('');
+  const d0=new Date(t0).toLocaleDateString(undefined,{day:'numeric',month:'short'});
+  const label=q.options.map((o,k)=>`${o} ${Math.round(q.probs[k]*100)}%`).join(', ');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Odds over time. Now: ${esc(label)}">${grid}${lines}<text x="${L}" y="${H-4}">${d0}</text><text x="${W-R}" y="${H-4}" text-anchor="end">Now</text></svg>`;
+}
+function qCard(q){
+  return `<div class="card kasavu">
+    <h3>${esc(q.q)}</h3>
+    <p class="small" style="margin:0">${q.guesses} ${q.guesses===1?'prediction':'predictions'}${q.outcome>=0?'. The result is in!':q.closed?'. Closed.':''}</p>
+    ${chartSVG(q)}
+    <div class="popts">${q.options.map((o,k)=>{ const mine=q.myPick===k, win=q.outcome===k;
+      const sub=win?(mine?`You called it! +${q.myPoints} points`:'This is what happened!')
+        :q.outcome>=0?(mine?'Not this time':'')
+        :mine?`Your prediction: ${q.myPoints} points if you're right`
+        :q.closed?'':`Pick now: ${payoutFor(q,k)} points if right`;
+      return `<button class="popt ${mine?'on':''} ${win?'win':''}" type="button" data-q="${esc(q.id)}" data-k="${k}" ${q.closed?'disabled':''} aria-pressed="${mine}">
+        <span class="sw" style="background:${PCOL[k]}"></span><span class="pl">${esc(o)}</span><span class="pp">${Math.round(q.probs[k]*100)}%</span>${sub?`<span class="pay">${sub}</span>`:''}</button>`; }).join('')}</div>
+  </div>`;
+}
+function renderPredict(){
+  let h='';
+  if(P.resolved&&P.leaders.length) h+=`<div class="card kasavu"><h3>Best predictors</h3>
+    <p class="small">${P.resolved} of ${P.questions.length} results are in.</p>
+    <ol class="lb">${P.leaders.map((p,k)=>`<li class="${p.me?'me':''}"><span class="rk">${k+1}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}<div class="small">${p.correct} right</div></span><span class="sc">${p.points}</span></li>`).join('')}</ol></div>`;
+  if(!P.open&&!P.resolved) h+=`<div class="card"><h3>Predictions are locked</h3><p>No more changes. Results will be posted after the celebrations!</p></div>`;
+  h+=P.questions.map(qCard).join('')||'<p>No predictions yet.</p>';
+  h+=`<div class="row" style="justify-content:center"><button class="btn share" type="button" id="pRefresh">Refresh the odds</button></div>`;
+  $('#predictBox').innerHTML=h;
+  document.querySelectorAll('.popt:not(:disabled)').forEach(b=>b.onclick=()=>needProfile(p=>predict(b.dataset.q,+b.dataset.k,p)));
+  $('#pRefresh').onclick=()=>loadPredict(false);
+}
+async function predict(qid,k,prof){
+  document.querySelectorAll(`.popt[data-q="${CSS.escape(qid)}"]`).forEach(b=>b.disabled=true);
+  try{ const before=P.questions.find(q=>q.id===qid); const was=before&&before.myPick; P=await api('predict',{qid,pick:k,name:prof.name,team:prof.team}); renderPredict(); if(was!==k){ const q=P.questions.find(x=>x.id===qid); toast(`Locked in: ${q.myPoints} points if you're right!`); } }
+  catch(e){ toast(e.message); loadPredict(false); }
+}
+setInterval(()=>{ if(location.hash==='#predict'&&P&&document.visibilityState==='visible') loadPredict(false); },60000);
+
+/* =====================================================================
+   BLESSINGS
+   ===================================================================== */
+const TYPES={'Blessing':'May your life together be as calm and beautiful as the backwaters at sunset…','Marriage advice':'Never go to bed angry. Or hungry.','Wish':'I wish you a lifetime of…'};
+let bType='Blessing';
+function renderBlessForm(){
+  const p=getProfile()||{};
+  $('#blessBox').innerHTML=`<div class="card kasavu">
+    <h3>Write to ${esc(COUPLE)}</h3>
+    <label for="bName">Your name</label><input type="text" id="bName" maxlength="60" value="${esc(p.name||'')}" autocomplete="name">
+    <label for="bRel">How do you know them? <span class="opt-l">(optional)</span></label><input type="text" id="bRel" maxlength="80" placeholder="e.g. Ishan's cousin, Nikita's school friend">
+    <label id="bTypeL">What are you sending?</label>
+    <div class="chips" role="radiogroup" aria-labelledby="bTypeL">${Object.keys(TYPES).map(t=>`<button type="button" class="chip" role="radio" aria-checked="${t===bType}" data-t="${t}">${t}</button>`).join('')}</div>
+    <label for="bMsg">Your message</label><textarea id="bMsg" maxlength="1000" placeholder="${esc(TYPES[bType])}"></textarea>
+    <label class="chk"><input type="checkbox" id="bPublic" checked> Show this on the blessings wall</label>
+    <p class="small" style="margin:2px 0 14px">Untick to send it privately to ${esc(CONFIG.BRIDE)} and ${esc(CONFIG.GROOM)} only.</p>
+    <button class="btn primary wide" type="button" id="bSend">Send my message</button>
+  </div>`;
+  document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ bType=c.dataset.t; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-checked',x===c)); $('#bMsg').placeholder=TYPES[bType]; });
+  $('#bSend').onclick=sendBlessing;
+}
+async function sendBlessing(){
+  const name=$('#bName').value.trim(), message=$('#bMsg').value.trim(), isPublic=$('#bPublic').checked;
+  if(!name){ toast('Add your name so they know who it is from.'); $('#bName').focus(); return; }
+  if(!message){ toast('Write your message first.'); $('#bMsg').focus(); return; }
+  const b=$('#bSend'); b.disabled=true; b.textContent='Sending…';
+  try{
+    const r=await api('bless',{name,relation:$('#bRel').value.trim(),type:bType,message,isPublic});
+    const p=getProfile(); if(!p) store.set('wed_profile',JSON.stringify({name,team:''}));
+    $('#blessBox').innerHTML=`<div class="card kasavu" style="text-align:center">
+      <h3>Thank you, ${esc(name)}!</h3>
+      <p>Your message is on its way to ${esc(COUPLE)}.${isPublic?(r.needsApproval?' It will appear on the wall once the couple has seen it.':' You can see it on the wall below.'):' Only they will see it.'}</p>
+      <button class="btn" type="button" id="bAgain">Write another</button>
+    </div>`;
+    $('#bAgain').onclick=renderBlessForm;
+    renderWall(r); renderWho();
+  }catch(e){ toast(e.message); b.disabled=false; b.textContent='Send my message'; }
+}
+async function loadWall(){
+  const el=$('#wallBox'); el.innerHTML=loading('Unrolling the palm leaves…');
+  try{ renderWall(await api('blessings')); }catch(e){ errorCard(el,e,loadWall); }
+}
+function renderWall(r){
+  $('#wallBox').innerHTML=`<div class="row" style="justify-content:space-between;margin-top:22px"><h3 style="margin:0">The blessings wall</h3><button class="btn share" type="button" id="wRefresh">Refresh</button></div>
+    <p class="small">${r.count} ${r.count===1?'message':'messages'} sent so far.</p>
+    <div class="wall">${r.items.length?r.items.map(b=>`<article class="leaf">
+      <span class="tag">${esc(b.type)}</span>
+      <div class="msg">${esc(b.message)}</div>
+      <div class="from">${esc(b.name)}${b.relation?`<span class="rel">, ${esc(b.relation)}</span>`:''}</div>
+    </article>`).join(''):'<p>The wall is waiting for its first blessing.</p>'}</div>`;
+  $('#wRefresh').onclick=loadWall;
+}
+
+/* ---------- Share links & countdown ---------- */
+const SHARE={
+  quiz:`How well do you know ${COUPLE}? Take the backwater quiz and get on the leaderboard: ${siteURL()}#quiz`,
+  songs:`Think you know what everyone will dance to? Pick your Sangeet six for ${COUPLE} and see if you match the crowd: ${siteURL()}#songs`,
+  predict:`Who will cry first at ${COUPLE}'s wedding? Make your predictions and watch the odds move: ${siteURL()}#predict`,
+  blessings:`Leave a blessing or your best marriage advice for ${COUPLE}: ${siteURL()}#blessings`,
+};
+document.querySelectorAll('[data-share]').forEach(a=>a.href=wa(SHARE[a.dataset.share]));
+(function(){
+  const d=Math.ceil((new Date(CONFIG.FIRST_EVENT)-new Date())/86400000);
+  $('#countdown').textContent=d>1?`${d} days to go`:d===1?'Tomorrow!':d>-2?'The celebrations are here!':'Thank you for celebrating with us';
+})();
+
+/* =====================================================================
+   PREVIEW MODE – runs when API_URL is empty. Mirrors the real server.
+   ===================================================================== */
+function makeDemo(){
+  const KEY='wed_demo_db2', HOUR=3600e3, now=Date.now();
+  const DEMO_PRED=[
+    {id:'p1',q:'Who will get emotional first?',options:['Nikita','Ishan','The parents','All of us!'],outcome:2},
+    {id:'p2',q:'Who will be the last one on the dance floor?',options:['Team Bride','Team Groom','The couple','The parents!'],outcome:-1},
+    {id:'p3',q:"Will the groom's entry start on time?",options:['Yes, on the dot','No, Indian Standard Time!'],outcome:1},
+    {id:'p4',q:'Will Ishan dance at the Sangeet without being dragged on stage?',options:['Yes, he was born for this','No, it will take a team effort'],outcome:-1},
+    {id:'p5',q:'Will it rain during any of the celebrations?',options:['Yes','No, clear Kerala skies'],outcome:-1},
+  ];
+  let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const choose=w=>{ let r=rnd()*w.reduce((a,b)=>a+b,0); for(let i=0;i<w.length;i++){ if((r-=w[i])<=0) return i; } return w.length-1; };
+  const NAMES=['Ammu','Unni','Kunjan','Chinnu','Appu','Kichu','Meenu','Tinku','Sonu','Pinky','Bablu','Guddu','Rinku','Chotu','Mithu','Laddu','Gudiya','Bunty','Tuktuk','Golu'];
+  function seedDb(){
+    const songs=[['London Thumakda','Queen'],['Jimikki Kammal','Velipadinte Pusthakam'],['Gallan Goodiyaan','Dil Dhadakne Do'],['Kala Chashma','Baar Baar Dekho'],['Nachde Ne Saare','Baar Baar Dekho'],['Badtameez Dil','Yeh Jawaani Hai Deewani'],['Gal Mitthi Mitthi','Aisha'],['Tunak Tunak Tun','Daler Mehndi'],['Malhari','Bajirao Mastani'],['Kudi Nu Nachne De','Angrezi Medium']]
+      .map(([title,artist],i)=>({id:'x'+i,title,artist,by:NAMES[i],team:i%2?'Ishan':'Nikita',device:'d'+i,time:now-(120-i)*HOUR}));
+    const pop=[9,7,8,6,5,6,3,4,2,3];
+    const lineups=NAMES.slice(0,16).map((name,i)=>{ const ids=new Set(); while(ids.size<6) ids.add('x'+choose(pop.map((w,k)=>ids.has('x'+k)?0:w))); return {device:'d'+i,name,team:i%2?'Ishan':'Nikita',ids:[...ids],time:now-(100-i*5)*HOUR}; });
+    const picks=[];
+    const bias={p1:[2,3,5,3],p2:[4,4,2,3],p3:[3,6],p4:[4,5],p5:[2,5]};
+    DEMO_PRED.forEach(q=>{ NAMES.forEach((name,i)=>{ if(rnd()<.25) return; const t=now-(130-i*6-rnd()*8)*HOUR; picks.push({time:t,name,team:i%2?'Ishan':'Nikita',qid:q.id,pick:choose(bias[q.id]),device:'d'+i}); }); });
+    picks.sort((a,b)=>a.time-b.time);
+    return {
+      scores:[{name:'Ammu',team:'Nikita',score:1270,correct:9,total:10,device:'d1'},{name:'Unni',team:'Ishan',score:1105,correct:8,total:10,device:'d2'},{name:'Kunjan',team:'Ishan',score:860,correct:6,total:10,device:'d3'},{name:'Chinnu',team:'Nikita',score:720,correct:5,total:10,device:'d4'}],
+      songs, lineups, picks, flags:{reveal:false,resolved:false},
+      blessings:[{name:'Unni',relation:"Ishan's cousin",type:'Marriage advice',message:'Always let her pick the restaurant. Then order what she wanted to try.',isPublic:true,device:'d2'},{name:'Ammu',relation:"Nikita's school friend",type:'Blessing',message:'May every day together feel like a slow evening on the backwaters. So happy for you both!',isPublic:true,device:'d1'}],
+    };
+  }
+  let db=readJSON(KEY); if(!db) db=seedDb();
+  // replay historic picks to record the odds each guest locked in
+  const W=5;
+  function predState(device){
+    const scores={};
+    const questions=DEMO_PRED.map(q0=>{
+      const q={...q0,outcome:db.flags.resolved?q0.outcome:-1}, n=q.options.length, counts=new Array(n).fill(0), cur={}, last={};
+      const prob=()=>{ const tot=counts.reduce((a,b)=>a+b,0), den=tot+W*n; return counts.map(x=>den?(x+W)/den:1/n); };
+      const rows=db.picks.filter(r=>r.qid===q.id);
+      const hist=[[(rows.length?rows[0].time:Date.now())-6*HOUR,...prob()]];
+      rows.forEach(r=>{ if(r.points==null){ const c=counts.slice(); if(r.device in cur) c[cur[r.device]]--; const tot=c.reduce((a,b)=>a+b,0); const p=Math.max(.01,(c[r.pick]+W)/(tot+W*n)); r.points=Math.min(1000,Math.round(100/p)); }
+        if(r.device in cur) counts[cur[r.device]]--; cur[r.device]=r.pick; counts[r.pick]++; last[r.device]=r; hist.push([r.time,...prob()]); });
+      hist.push([Date.now(),...prob()]);
+      if(q.outcome>=0) Object.keys(last).forEach(d=>{ const r=last[d]; const s=scores[d]=scores[d]||{name:r.name,team:r.team,points:0,correct:0,me:d===device}; if(cur[d]===q.outcome){ s.points+=r.points; s.correct++; } });
+      const mine=last[device];
+      return {id:q.id,q:q.q,options:q.options,outcome:q.outcome,closed:q.outcome>=0,counts,guesses:counts.reduce((a,b)=>a+b,0),probs:prob(),myPick:mine?cur[device]:-1,myPoints:mine?mine.points:0,history:hist};
+    });
+    return {open:true,weight:W,questions,leaders:Object.values(scores).sort((a,b)=>b.points-a.points||b.correct-a.correct).slice(0,25),resolved:questions.filter(q=>q.outcome>=0).length};
+  }
+  function songState(device){
+    const size=6, songs=db.songs.map(s=>({id:s.id,title:s.title,artist:s.artist,by:s.by,team:s.team})).sort((a,b)=>a.title.localeCompare(b.title));
+    const mine=db.lineups.find(l=>l.device===device);
+    const out={open:!db.flags.reveal,reveal:db.flags.reveal,size,maxSuggestions:5,mySuggestions:db.songs.filter(s=>s.device===device).length,myPicks:mine?mine.ids:[],lockedAt:mine&&mine.ids.length>=size?mine.time:null,entries:db.lineups.filter(l=>l.ids.length>=size).length,songs};
+    if(db.flags.reveal){
+      const counts={}; db.lineups.forEach(l=>l.ids.forEach(id=>counts[id]=(counts[id]||0)+1));
+      const ranked=songs.map(s=>({...s,picks:counts[s.id]||0})).sort((a,b)=>b.picks-a.picks||a.title.localeCompare(b.title));
+      const cutoff=ranked.length>=size?ranked[size-1].picks:1, topIds=ranked.filter(s=>s.picks>0&&s.picks>=cutoff).map(s=>s.id), top=new Set(topIds);
+      const players=db.lineups.filter(l=>l.ids.length>=size).map(l=>({name:l.name,team:l.team,me:l.device===device,locked:l.time,matches:l.ids.filter(id=>top.has(id)).length,points:l.ids.reduce((a,id)=>a+(counts[id]||0),0)})).sort((a,b)=>b.matches-a.matches||b.points-a.points||a.locked-b.locked);
+      players.forEach((p,i)=>p.rank=i+1);
+      Object.assign(out,{songs:ranked,topIds,board:players.slice(0,25),myResult:players.find(p=>p.me)||null,players:players.length});
+    }
+    return out;
+  }
+  const save=()=>store.set(KEY,JSON.stringify(db));
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const key=s=>String(s).toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+  const findScore=d=>{ const s=db.scores.find(x=>x.device===d); return s?{score:s.score,correct:s.correct,total:s.total}:null; };
+  const review=()=>DEMO_QUIZ.map(q=>({answer:q.answer,fact:q.fact}));
+  const blessState=()=>({open:true,needsApproval:false,count:db.blessings.length,items:db.blessings.filter(b=>b.isPublic).slice().reverse()});
+  const H={
+    quiz:r=>({open:true,seconds:20,questions:DEMO_QUIZ.map(q=>({q:q.q,options:q.options})),done:findScore(r.device),review:findScore(r.device)?review():null}),
+    submitQuiz:r=>{
+      const prev=findScore(r.device); if(prev) return {already:true,result:prev,review:review()};
+      let score=0,correct=0;
+      DEMO_QUIZ.forEach((q,i)=>{ if(r.answers[i]===q.answer){ correct++; const t=Math.min(20000,r.times[i]||20000); score+=100+Math.round(50*(1-t/20000)); } });
+      db.scores.push({name:r.name||'Guest',team:r.team||'',score,correct,total:DEMO_QUIZ.length,device:r.device});
+      return {result:{score,correct,total:DEMO_QUIZ.length},review:review()};
+    },
+    leaderboard:r=>{
+      const all=db.scores.slice().sort((a,b)=>b.score-a.score).map(s=>({name:s.name,team:s.team,score:s.score,correct:s.correct,total:s.total,me:s.device===r.device}));
+      const teams={Nikita:{players:0,total:0},Ishan:{players:0,total:0}}; all.forEach(p=>{ if(teams[p.team]){ teams[p.team].players++; teams[p.team].total+=p.score; } });
+      return {top:all.slice(0,25),players:all.length,teams,myRank:all.findIndex(p=>p.me)+1};
+    },
+    songs:r=>songState(r.device),
+    suggestSong:r=>{
+      if(db.flags.reveal) throw new Error('The song battle has closed.');
+      const title=String(r.title||'').trim().slice(0,80); if(!title) throw new Error('Add the name of the song.');
+      const dup=db.songs.find(s=>key(s.title)===key(title)); if(dup) return {...songState(r.device),duplicate:dup.id};
+      if(db.songs.filter(s=>s.device===r.device).length>=5) throw new Error("You've added 5 songs already. Pick your six from the list!");
+      const id='s'+Date.now().toString(36); db.songs.push({id,title,artist:String(r.artist||'').slice(0,80),by:r.name||'Guest',team:r.team||'',device:r.device,time:Date.now()});
+      return {...songState(r.device),added:id};
+    },
+    saveLineup:r=>{
+      if(db.flags.reveal) throw new Error('Lineups are locked.');
+      const ids=new Set(db.songs.map(s=>s.id)), picks=[...new Set(r.picks||[])].filter(id=>ids.has(id));
+      if(picks.length>6) throw new Error('Your lineup can only have 6 songs.');
+      const l=db.lineups.find(x=>x.device===r.device);
+      if(l){ if(l.ids.join()!==picks.join()){ l.ids=picks; l.time=Date.now(); l.name=r.name; l.team=r.team; } }
+      else db.lineups.push({device:r.device,name:r.name||'Guest',team:r.team||'',ids:picks,time:Date.now()});
+      return songState(r.device);
+    },
+    predictions:r=>predState(r.device),
+    predict:r=>{
+      const st=predState(r.device), q=st.questions.find(x=>x.id===r.qid);
+      if(!q||q.closed) throw new Error('This prediction has closed.');
+      if(q.myPick!==r.pick) db.picks.push({time:Date.now(),name:r.name||'Guest',team:r.team||'',qid:r.qid,pick:r.pick,device:r.device});
+      return predState(r.device);
+    },
+    blessings:()=>blessState(),
+    bless:r=>{ if(!r.name) throw new Error('Add your name so they know who it is from.'); if(!r.message) throw new Error('Write your message first.'); db.blessings.push({name:r.name,relation:r.relation||'',type:r.type,message:r.message,isPublic:!!r.isPublic,device:r.device}); return blessState(); },
+  };
+  const api=async req=>{ await sleep(300); const h=H[req.action]; if(!h) throw new Error('Unknown action'); const out=h(req); save(); return {ok:true,...out}; };
+  api.flags=()=>db.flags;
+  api.toggle=f=>{ db.flags[f]=!db.flags[f]; save(); };
+  api.reset=()=>{ db=seedDb(); save(); };
+  return api;
+}
+
+/* Preview-only controls so you can see what results look like */
+function renderDemoControls(){
+  const f=demoApi.flags();
+  $('#demoNote').innerHTML=`<strong>Preview mode.</strong> Everything is saved on this device only, with sample guests. Paste your Google Script link into <code>API_URL</code> to go live.
+    <div class="row" style="margin-top:8px">
+      <button class="btn share" type="button" data-demo="reveal">${f.reveal?'Hide':'Reveal'} song results</button>
+      <button class="btn share" type="button" data-demo="resolved">${f.resolved?'Undo':'Enter'} sample prediction results</button>
+      <button class="btn share" type="button" data-demo="reset">Reset preview</button>
+    </div>`;
+  document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>{
+    const a=b.dataset.demo;
+    if(a==='reset'){ demoApi.reset(); store.set('wed_quiz',''); } else demoApi.toggle(a);
+    renderDemoControls(); loaded.quiz=0; loaded.bless=0; route();
+    if(S) loadSongs(false); if(P) loadPredict(false);
+  });
+}
+
+/* ---------- Start ---------- */
+if(!CONFIG.API_URL){ $('#demoNote').classList.remove('hidden'); renderDemoControls(); }
+renderWho(); route();
+</script>
+</body>
+</html>
