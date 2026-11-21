@@ -111,6 +111,23 @@ textarea{resize:vertical;min-height:120px}
 .review .yes{color:var(--ok);font-weight:700} .review .no{color:var(--bad);font-weight:700}
 .review .fact{font-size:14px;color:var(--muted)}
 
+/* Quiz rounds */
+.rounds{display:grid;gap:10px;margin-top:12px}
+.round{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--page)}
+.round.is-open{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.round.is-locked{opacity:.85}
+.rhead{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.rnum{font:400 18px "Rozha One",Georgia,serif;color:var(--gold)}
+.rname{font-weight:700;font-size:18px;margin:2px 0}
+.rstat{font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px}
+.rstat.open{background:var(--gold);color:#1b1708}
+.rstat.done{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.rstat.locked{background:var(--line);color:var(--muted);font-weight:400}
+.raction{margin-top:10px}
+.tickwrap{display:inline-block;font-weight:700;font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:10px;border:1.5px dashed var(--gold)}
+.tick{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.roundnote{margin:14px 0 4px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--gold) 16%,var(--card));line-height:1.5}
+
 /* Leaderboard */
 .teambar{display:flex;height:40px;border-radius:10px;overflow:hidden;font-weight:700;font-size:14px;color:#fff;margin:8px 0 4px}
 .teambar span{display:flex;align-items:center;padding:0 10px;min-width:max-content;transition:flex .6s}
@@ -252,7 +269,7 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
     <p class="lead">Welcome aboard! While we count down to Kumarakom, here are four ways to join in from your phone.</p>
     <a class="tile" href="#quiz"><div class="card kasavu">
       <h3>The backwater quiz</h3>
-      <p>Ten stops along the backwaters. Some questions are about Kerala, some about the two of us. Answer fast for bonus points and climb the leaderboard.</p>
+      <p>Three rounds of five questions, with a new round each weekend. Follow our story from the first swipe to the proposal, with a little Kerala along the way, and climb the leaderboard.</p>
       <div class="go">Board the houseboat</div>
     </div></a>
     <a class="tile" href="#songs"><div class="card kasavu">
@@ -323,8 +340,8 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
    SETTINGS – the only part you need to edit
    ===================================================================== */
 const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycbyUR6-IERxPaFRnaJGeTLtLyxCxI54nOg6ZdJkLUoyXRf0uaQ6PgC7Gv82UFlF4pdxr/exec',       // paste your Google Apps Script web app URL here (ends in /exec)
-  SITE_URL: 'https://ishan-suthar.github.io/wedding-games/',      // optional: your GitHub Pages link, used in WhatsApp share messages
+  API_URL: '',       // paste your Google Apps Script web app URL here (ends in /exec)
+  SITE_URL: '',      // optional: your GitHub Pages link, used in WhatsApp share messages
   BRIDE: 'Nikita',
   GROOM: 'Ishan',
   FIRST_EVENT: '2026-12-20T10:00:00+05:30', // for the countdown
@@ -332,16 +349,21 @@ const CONFIG = {
 
 /* Questions used in preview mode only. When live, questions come from the Quiz tab of your sheet. */
 const DEMO_QUIZ = [
-  {q:"What's the traditional name for a Kerala houseboat?",options:['Shikara','Kettuvallam','Chundan vallam','Catamaran'],answer:1,fact:"'Kettu' means tied: these boats were built by lashing planks together with coir rope, without nails."},
-  {q:'Who made the first move?',options:['Nikita','Ishan','A friend set them up','Still being debated'],answer:0,fact:''},
-  {q:'Kumarakom sits on the shore of which lake?',options:['Vembanad','Ashtamudi','Dal','Chilika'],answer:0,fact:"Vembanad is India's longest lake and stretches across three districts of Kerala."},
-  {q:'Who takes longer to get ready?',options:['Nikita','Ishan','Both, equally!'],answer:0,fact:''},
-  {q:"What's the grand feast served on a banana leaf called?",options:['Thali','Sadya','Pongal','Bhojanam'],answer:1,fact:'A full sadya can have more than 20 dishes, eaten by hand, with payasam as the sweet finale.'},
-  {q:'On a houseboat with no Wi-Fi, who gets restless first?',options:['Nikita','Ishan','Both, within an hour',"Neither, they'd love it"],answer:0,fact:''},
-  {q:'The ivory saree with a gold border worn at Kerala weddings is called…',options:['Banarasi','Kanjeevaram','Kasavu','Paithani'],answer:2,fact:"Kasavu is the gold zari border. The same weave is used for the men's mundu."},
-  {q:'What would Ishan reach for first at a sadya?',options:['Payasam','Avial','Pappadam','Banana chips'],answer:0,fact:''},
-  {q:'Which Kerala dance-drama is known for its elaborate green face make-up?',options:['Mohiniyattam','Kathakali','Bharatanatyam','Kuchipudi'],answer:1,fact:"Kathakali artists spend hours in make-up. The green 'pacha' face marks the noble hero."},
-  {q:"Who said 'I love you' first?",options:['Nikita','Ishan','They said it together','It was sent by text!'],answer:0,fact:''},
+  {q:"Which app did Nikita and Ishan match on?",options:["Hinge", "Bumble", "Dil Mil", "Shaadi.com"],answer:2,fact:"It was spring 2023, and one swipe started it all.",round:1},
+  {q:"What's the traditional name for a Kerala houseboat?",options:["Shikara", "Kettuvallam", "Chundan vallam", "Catamaran"],answer:1,fact:"The name comes from 'kettu', meaning tied: these boats were built by lashing planks together with coir rope, without nails.",round:1},
+  {q:"Besides Ishan looking handsome and genuine, what made Nikita swipe right?",options:["His travel photos", "His cooking skills", "His dance moves", "His dog, Kaz"],answer:3,fact:"Kaz made a guest appearance in one photo. Nikita came for the dog and stayed for the man.",round:1},
+  {q:"Why did Nikita fly to Charlotte when they first met in person?",options:["A work conference", "A dance competition", "A friend's wedding", "Just to see Ishan"],answer:1,fact:"They met in person about a month after matching.",round:1},
+  {q:"Kumarakom sits on the shore of which lake?",options:["Vembanad", "Ashtamudi", "Dal", "Chilika"],answer:0,fact:"Vembanad is India's longest lake and stretches across three districts of Kerala.",round:1},
+  {q:"Where did Ishan take Nikita right after she landed?",options:["A sushi bar", "A dumpling house", "A dessert shop", "A coffee shop"],answer:2,fact:"Tiny hiccup: Nikita doesn't even like desserts! Smooth sailing after that.",round:2},
+  {q:"What were they eating when Ishan asked Nikita to be his girlfriend?",options:["Dumplings", "Pizza", "Sushi", "Biryani"],answer:0,fact:"As all serious life decisions should be made.",round:2},
+  {q:"What's the grand feast served on a banana leaf called?",options:["Thali", "Sadya", "Pongal", "Bhojanam"],answer:1,fact:"A full sadya can have more than 20 dishes, eaten by hand, with payasam as the sweet finale.",round:2},
+  {q:"Which food does Nikita love almost as much as Ishan?",options:["Dosa", "Pasta", "Chaat", "Sushi"],answer:3,fact:"Their love for food runs even deeper than their love for each other. Almost.",round:2},
+  {q:"What big move happened in early 2024?",options:["They adopted a second dog", "Nikita moved to Charlotte", "Ishan moved to Nikita's city", "They moved abroad"],answer:1,fact:"Long distance turned into daily life: fun weekends, routines and cooking experiments.",round:2},
+  {q:"The ivory saree with a gold border worn at Kerala weddings is called…",options:["Banarasi", "Kanjeevaram", "Kasavu", "Paithani"],answer:2,fact:"Kasavu is the gold zari border. The same weave is used for the men's mundu.",round:3},
+  {q:"Where did Ishan propose?",options:["At a fancy dinner", "At the dessert shop from their first date", "At a dumpling restaurant", "On a cliff by the beach, in the middle of a hike"],answer:3,fact:"It happened at Cala Lily Valley, with a bunch of roses.",round:3},
+  {q:"Who was secretly hiding behind the bushes during the proposal?",options:["Nobody, it was just the two of them", "A hired photographer", "Their families and cousins", "Kaz the dog"],answer:2,fact:"Nikita's family, Ishan's uncle's family and their cousins all flew in to hide like a team of joyful spies.",round:3},
+  {q:"Which Kerala dance-drama is known for its elaborate green face make-up?",options:["Mohiniyattam", "Kathakali", "Bharatanatyam", "Kuchipudi"],answer:1,fact:"Kathakali artists spend hours in make-up. The green 'pacha' face marks the noble hero.",round:3},
+  {q:"What does Nikita remember most from Ishan's proposal speech?",options:["Happy jumping and waiting for the ring", "Every single word", "Crying the whole time", "Asking if it was a prank"],answer:0,fact:"Her brain was buffering. Priorities!",round:3},
 ];
 
 /* ---------- Small helpers ---------- */
@@ -412,9 +434,11 @@ function route(){
 window.addEventListener('hashchange',()=>{ route(); window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'smooth'}); });
 
 /* =====================================================================
-   THE BACKWATER QUIZ
+   THE BACKWATER QUIZ: three rounds that unlock one weekend at a time
    ===================================================================== */
-const Q={questions:[],i:0,answers:[],times:[],t0:0,seconds:20,locked:false,open:true};
+const QZ={rounds:[],seconds:20,open:true,offset:0};       // what the server says about the rounds
+const Q={round:1,questions:[],i:0,answers:[],times:[],t0:0,locked:false};   // the round being played
+const serverNow=()=>Date.now()+QZ.offset;
 const boatSVG=`<svg class="boat" viewBox="0 0 52 30" aria-hidden="true"><path d="M2 22 Q26 30 50 21 L47 19 Q26 25 5 19Z" fill="#3a1f10"/><path d="M8 19.5 Q26 4 44 19.5Z" fill="#c79a4b"/><path d="M12 18 Q26 8 40 18" fill="none" stroke="#8a6227" stroke-width="1"/><rect x="21" y="15" width="3" height="3" fill="#f1dc94"/><rect x="27" y="15" width="3" height="3" fill="#f1dc94"/></svg>`;
 function river(i,n){
   const pos=k=>n>1?4+k*(92/(n-1)):50;
@@ -427,45 +451,85 @@ function titleFor(pct){
   if(pct>=.3) return 'Happy Houseboat Passenger';
   return 'Lost Among the Coconut Palms';
 }
+const fmtOpens=t=>new Date(t).toLocaleString(undefined,{weekday:'long',day:'numeric',month:'long',hour:'numeric',minute:'2-digit'});
+function fmtLeft(ms){
+  if(ms<=0) return 'now';
+  const s=Math.floor(ms/1000), d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), x=s%60;
+  const p=n=>String(n).padStart(2,'0');
+  return d?`${d}d ${p(h)}h ${p(m)}m ${p(x)}s`:`${p(h)}h ${p(m)}m ${p(x)}s`;
+}
+/* Live countdowns: any element with data-until ticks every second; when one hits zero, reload so the round opens */
+let reloadingQuiz=false;
+setInterval(()=>{
+  const els=document.querySelectorAll('[data-until]'); if(!els.length) return;
+  let opened=false;
+  els.forEach(el=>{ const left=+el.dataset.until-serverNow(); el.textContent=fmtLeft(left); if(left<=0) opened=true; });
+  if(opened&&!reloadingQuiz&&location.hash==='#quiz'&&!Q.playing){ reloadingQuiz=true; setTimeout(()=>{ reloadingQuiz=false; loadQuiz(); },1200); }
+},1000);
+const savedRound=n=>readJSON('wed_quiz_r'+n)||{};
+const nextLocked=()=>QZ.rounds.find(r=>!r.unlocked);
+
 async function loadQuiz(){
-  const box=$('#quizBox'); box.innerHTML=loading('Getting the houseboat ready…');
+  const box=$('#quizBox'); if(!QZ.rounds.length) box.innerHTML=loading('Getting the houseboat ready…');
   try{
     const r=await api('quiz');
-    Q.questions=r.questions; Q.seconds=r.seconds||20; Q.open=r.open!==false;
-    if(r.done){ const saved=readJSON('wed_quiz')||{}; showResult(r.done,r.review||saved.review,saved.answers,true); }
-    else quizIntro();
+    QZ.rounds=r.rounds||[]; QZ.seconds=r.seconds||20; QZ.open=r.open!==false; QZ.offset=(r.now||Date.now())-Date.now();
+    renderRounds();
   }catch(e){ errorCard(box,e,loadQuiz); }
 }
-function quizIntro(){
-  const n=Q.questions.length;
-  if(!Q.open){ $('#quizBox').innerHTML=`<div class="card kasavu"><h3>The quiz has closed</h3><p>Thank you for playing! Here's how everyone did.</p></div>`; renderLeaderboard(); return; }
-  $('#quizBox').innerHTML=`<div class="card kasavu">
-    ${river(0,n)}
-    <p class="lead">${n} stops along the backwaters. Some questions are about Kerala, some are about ${esc(CONFIG.BRIDE)} and ${esc(CONFIG.GROOM)}.</p>
-    <p>Every right answer is worth 100 points, plus up to 50 more if you answer within ${Q.seconds} seconds. You get one go, so make it count!</p>
-    <button class="btn primary wide" id="startQuiz" type="button">Board the houseboat</button>
+function renderRounds(){
+  Q.playing=false;
+  const box=$('#quizBox'), rounds=QZ.rounds, next=nextLocked();
+  if(!QZ.open){ box.innerHTML=`<div class="card kasavu"><h3>The quiz has closed</h3><p>Thank you for playing! Here's how everyone did.</p></div>`; renderLeaderboard(); return; }
+  const allDone=rounds.length&&rounds.every(r=>r.done);
+  const playable=rounds.find(r=>r.unlocked&&!r.done);
+  let banner='';
+  if(playable) banner=`<p class="roundnote"><strong>Round ${playable.n} is open!</strong> ${rounds.filter(r=>r.unlocked&&!r.done).length>1?'You have rounds to catch up on.':'Play it whenever you like.'}</p>`;
+  else if(next) banner=`<p class="roundnote">You're all caught up! <strong>Round ${next.n}</strong> opens in <span class="tick" data-until="${next.opensAt}">${fmtLeft(next.opensAt-serverNow())}</span></p>`;
+  else if(allDone) banner=`<p class="roundnote">You've played every round! The winners will be announced at the Sangeet.</p>`;
+  box.innerHTML=`<div class="card kasavu">
+    <p class="lead" style="margin-bottom:6px">${rounds.length} rounds, one each weekend, following ${esc(CONFIG.BRIDE)} and ${esc(CONFIG.GROOM)}'s story, with a little Kerala along the way.</p>
+    <p class="small">Each right answer is worth 100 points, plus up to 50 more if you answer within ${QZ.seconds} seconds. You can play each round once, and your points from every round add up on the leaderboard.</p>
+    ${banner}
+    <div class="rounds">${rounds.map(r=>{
+      const status=r.done?`<span class="rstat done">Played: ${r.done.score} points</span>`
+        :r.unlocked?`<span class="rstat open">Open now</span>`
+        :`<span class="rstat locked">Opens ${esc(fmtOpens(r.opensAt))}</span>`;
+      const action=r.done?`<button class="btn share" type="button" data-review="${r.n}">See your answers</button>`
+        :r.unlocked?`<button class="btn primary" type="button" data-play="${r.n}">Play round ${r.n}</button>`
+        :`<span class="tickwrap" aria-label="Time until round ${r.n} opens"><span class="tick" data-until="${r.opensAt}">${fmtLeft(r.opensAt-serverNow())}</span></span>`;
+      return `<div class="round ${r.done?'is-done':r.unlocked?'is-open':'is-locked'}">
+        <div class="rhead"><span class="rnum">Round ${r.n}</span>${status}</div>
+        <div class="rname">${esc(r.name)}</div>
+        <div class="small">${r.count} questions</div>
+        <div class="raction">${action}</div>
+      </div>`; }).join('')}</div>
   </div>`;
-  $('#startQuiz').onclick=()=>needProfile(()=>{ Q.i=0; Q.answers=[]; Q.times=[]; renderQ(); });
+  box.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startRound(+b.dataset.play));
+  box.querySelectorAll('[data-review]').forEach(b=>b.onclick=()=>{ const r=rounds.find(x=>x.n===+b.dataset.review), s=savedRound(r.n); Q.round=r.n; Q.questions=r.questions; showResult(r.done,r.review||s.review,s.answers,true); });
   renderLeaderboard();
+}
+function startRound(n){
+  const r=QZ.rounds.find(x=>x.n===n); if(!r||!r.unlocked||r.done) return;
+  needProfile(()=>{ Q.round=n; Q.questions=r.questions; Q.i=0; Q.answers=[]; Q.times=[]; Q.playing=true; renderQ(); });
 }
 function renderQ(){
   const n=Q.questions.length, q=Q.questions[Q.i]; Q.locked=false;
   $('#quizLb').innerHTML='';
   $('#quizBox').innerHTML=`<div class="card kasavu">
     ${river(Q.i,n)}
-    <div class="qmeta"><span>Stop ${Q.i+1} of ${n}</span><span id="qClock">${Q.seconds}s bonus</span></div>
+    <div class="qmeta"><span>Round ${Q.round}: stop ${Q.i+1} of ${n}</span><span id="qClock">${QZ.seconds}s bonus</span></div>
     <h3 class="qtext" id="qText" tabindex="-1">${esc(q.q)}</h3>
     <div class="timer"><i id="tbar"></i></div>
     <div class="opts">${q.options.map((o,j)=>`<button class="opt" type="button" data-j="${j}"><b>${'ABCD'[j]}</b><span>${esc(o)}</span></button>`).join('')}</div>
   </div>`;
-  // sail the boat to this stop
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     const pos=n>1?4+Q.i*(92/(n-1)):50; $('#boatPos').style.left=pos+'%';
-    const bar=$('#tbar'); bar.style.transition=`width ${Q.seconds}s linear`; bar.style.width='0%';
+    const bar=$('#tbar'); bar.style.transition=`width ${QZ.seconds}s linear`; bar.style.width='0%';
   }));
   Q.t0=performance.now();
   clearInterval(Q.clock);
-  Q.clock=setInterval(()=>{ const left=Math.max(0,Q.seconds-Math.floor((performance.now()-Q.t0)/1000)); const c=$('#qClock'); if(c) c.textContent=left?`${left}s bonus`:'No bonus, still answer!'; },250);
+  Q.clock=setInterval(()=>{ const left=Math.max(0,QZ.seconds-Math.floor((performance.now()-Q.t0)/1000)); const c=$('#qClock'); if(c) c.textContent=left?`${left}s bonus`:'No bonus, still answer!'; },250);
   document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.j,b));
   $('#qText').focus({preventScroll:true});
 }
@@ -480,17 +544,24 @@ async function submitQuiz(){
   const box=$('#quizBox'); box.innerHTML=`<div class="card kasavu">${river(Q.questions.length,Q.questions.length)}${loading('Docking at the jetty and counting your points…')}</div>`;
   const p=getProfile()||{};
   try{
-    const r=await api('submitQuiz',{name:p.name,team:p.team,answers:Q.answers,times:Q.times});
-    store.set('wed_quiz',JSON.stringify({result:r.result,review:r.review,answers:Q.answers}));
+    const r=await api('submitQuiz',{round:Q.round,name:p.name,team:p.team,answers:Q.answers,times:Q.times});
+    store.set('wed_quiz_r'+Q.round,JSON.stringify({result:r.result,review:r.review,answers:Q.answers}));
+    const rr=QZ.rounds.find(x=>x.n===Q.round); if(rr){ rr.done=r.result; rr.review=r.review; }
+    Q.playing=false;
     showResult(r.result,r.review,Q.answers,r.already);
   }catch(e){ errorCard(box,e,submitQuiz); }
 }
 function showResult(res,review,answers,already){
-  const pct=res.total?res.correct/res.total:0, title=titleFor(pct);
-  const shareText=`I scored ${res.score} points on ${COUPLE}'s backwater quiz and I'm a "${title}"! Think you know them better? ${siteURL()}#quiz`;
+  Q.playing=false;
+  const n=Q.round, pct=res.total?res.correct/res.total:0, title=titleFor(pct);
+  const shareText=`I scored ${res.score} points in round ${n} of ${COUPLE}'s backwater quiz and I'm a "${title}"! Think you know them better? ${siteURL()}#quiz`;
+  const nextOpen=QZ.rounds.find(r=>r.unlocked&&!r.done), next=nextLocked();
+  const nextMsg=nextOpen?`<p class="roundnote"><strong>Round ${nextOpen.n} is already open.</strong></p><button class="btn primary wide" type="button" id="playNext">Play round ${nextOpen.n}</button>`
+    :next?`<p class="roundnote">Round ${next.n}, <em>${esc(next.name)}</em>, opens in <span class="tick" data-until="${next.opensAt}">${fmtLeft(next.opensAt-serverNow())}</span><br><span class="small">${esc(fmtOpens(next.opensAt))}</span></p>`
+    :`<p class="roundnote">That was the final round! The winners will be announced at the Sangeet.</p>`;
   let rev='';
   if(review&&answers&&answers.length){
-    rev=`<div class="card"><h3>How you did</h3><ol class="review">${Q.questions.map((q,i)=>{
+    rev=`<div class="card"><h3>How you did in round ${n}</h3><ol class="review">${Q.questions.map((q,i)=>{
       const a=answers[i], c=review[i]?review[i].answer:-1, ok=a===c;
       return `<li><div><strong>${esc(q.q)}</strong></div>
         <div class="${ok?'yes':'no'}">${ok?'✓':'✗'} You said: ${esc(q.options[a]??'No answer')}</div>
@@ -498,12 +569,16 @@ function showResult(res,review,answers,already){
         ${review[i]&&review[i].fact?`<div class="fact">${esc(review[i].fact)}</div>`:''}</li>`;}).join('')}</ol></div>`;
   }
   $('#quizBox').innerHTML=`<div class="card kasavu result">
-    <p class="small">${already?"You've already sailed this quiz. Here's your result.":'You made it to the jetty!'}</p>
+    <p class="small">${already?`You've already sailed round ${n}. Here's your result.`:`Round ${n} complete. You made it to the jetty!`}</p>
     <div class="bigscore">${res.score}</div><div class="small">points</div>
     <h3 style="margin-top:10px">${esc(title)}</h3>
     <p>${res.correct} of ${res.total} correct</p>
     <a class="btn primary wide" href="${wa(shareText)}" target="_blank" rel="noopener">Share your score on WhatsApp</a>
+    ${nextMsg}
+    <button class="btn wide" type="button" id="backRounds" style="margin-top:10px">See all rounds</button>
   </div>${rev}`;
+  $('#backRounds').onclick=()=>{ renderRounds(); window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'smooth'}); };
+  const pn=$('#playNext'); if(pn) pn.onclick=()=>startRound(nextOpen.n);
   renderLeaderboard();
 }
 async function renderLeaderboard(){
@@ -513,12 +588,12 @@ async function renderLeaderboard(){
     const t=r.teams||{}, n=t.Nikita||{players:0,total:0}, i=t.Ishan||{players:0,total:0};
     const an=n.players?Math.round(n.total/n.players):0, ai=i.players?Math.round(i.total/i.players):0;
     el.innerHTML=`<div class="card">
-      <div class="row" style="justify-content:space-between"><h3 style="margin:0">Leaderboard</h3><button class="btn share" type="button" id="lbRefresh">Refresh</button></div>
+      <div class="row" style="justify-content:space-between"><h3 style="margin:0">Leaderboard</h3><button class="btn share" type="button" id="lbRefresh">Refresh</button></div><p class="small" style="margin:4px 0 0">Total points across all rounds.</p><div></div>
       <div class="teambar" role="img" aria-label="Team ${esc(CONFIG.BRIDE)} averages ${an} points, Team ${esc(CONFIG.GROOM)} averages ${ai} points">
         <span class="tn" style="flex:${an||1}">Team ${esc(CONFIG.BRIDE)} ${an}</span><span class="ti" style="flex:${ai||1}">${ai} Team ${esc(CONFIG.GROOM)}</span>
       </div>
       <p class="small">Average points per player: ${n.players} on Team ${esc(CONFIG.BRIDE)}, ${i.players} on Team ${esc(CONFIG.GROOM)}.</p>
-      ${r.top.length?`<ol class="lb">${r.top.map((p,k)=>`<li class="${p.me?'me':''}"><span class="rk">${p.rank||k+1}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}</span><span class="sc">${p.score}</span></li>`).join('')}</ol>`:'<p>No scores yet. Be the first on the board!</p>'}
+      ${r.top.length?`<ol class="lb">${r.top.map((p,k)=>`<li class="${p.me?'me':''}"><span class="rk">${p.rank||k+1}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}${p.played?`<div class="small">${p.played} of ${QZ.rounds.length||3} rounds</div>`:''}</span><span class="sc">${p.score}</span></li>`).join('')}</ol>`:'<p>No scores yet. Be the first on the board!</p>'}
       ${r.players>r.top.length?`<p class="small" style="margin-top:8px">${r.players} guests have played.</p>`:''}
     </div>`;
     $('#lbRefresh').onclick=renderLeaderboard;
@@ -768,7 +843,7 @@ document.querySelectorAll('[data-share]').forEach(a=>a.href=wa(SHARE[a.dataset.s
    PREVIEW MODE – runs when API_URL is empty. Mirrors the real server.
    ===================================================================== */
 function makeDemo(){
-  const KEY='wed_demo_db2', HOUR=3600e3, now=Date.now();
+  const KEY='wed_demo_db3', HOUR=3600e3, now=Date.now();
   const DEMO_PRED=[
     {id:'p1',q:'Who will get emotional first?',options:['Nikita','Ishan','The parents','All of us!'],outcome:2},
     {id:'p2',q:'Who will be the last one on the dance floor?',options:['Team Bride','Team Groom','The couple','The parents!'],outcome:-1},
@@ -789,8 +864,8 @@ function makeDemo(){
     DEMO_PRED.forEach(q=>{ NAMES.forEach((name,i)=>{ if(rnd()<.25) return; const t=now-(130-i*6-rnd()*8)*HOUR; picks.push({time:t,name,team:i%2?'Ishan':'Nikita',qid:q.id,pick:choose(bias[q.id]),device:'d'+i}); }); });
     picks.sort((a,b)=>a.time-b.time);
     return {
-      scores:[{name:'Ammu',team:'Nikita',score:1270,correct:9,total:10,device:'d1'},{name:'Unni',team:'Ishan',score:1105,correct:8,total:10,device:'d2'},{name:'Kunjan',team:'Ishan',score:860,correct:6,total:10,device:'d3'},{name:'Chinnu',team:'Nikita',score:720,correct:5,total:10,device:'d4'}],
-      songs, lineups, picks, flags:{reveal:false,resolved:false},
+      scores:[{name:'Ammu',team:'Nikita',score:690,correct:5,total:5,device:'d1',round:1},{name:'Unni',team:'Ishan',score:560,correct:4,total:5,device:'d2',round:1},{name:'Kunjan',team:'Ishan',score:430,correct:3,total:5,device:'d3',round:1},{name:'Chinnu',team:'Nikita',score:300,correct:2,total:5,device:'d4',round:1}],
+      songs, lineups, picks, created:now, flags:{reveal:false,resolved:false,allRounds:false},
       blessings:[{name:'Unni',relation:"Ishan's cousin",type:'Marriage advice',message:'Always let her pick the restaurant. Then order what she wanted to try.',isPublic:true,device:'d2'},{name:'Ammu',relation:"Nikita's school friend",type:'Blessing',message:'May every day together feel like a slow evening on the backwaters. So happy for you both!',isPublic:true,device:'d1'}],
     };
   }
@@ -830,20 +905,27 @@ function makeDemo(){
   const save=()=>store.set(KEY,JSON.stringify(db));
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const key=s=>String(s).toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
-  const findScore=d=>{ const s=db.scores.find(x=>x.device===d); return s?{score:s.score,correct:s.correct,total:s.total}:null; };
-  const review=()=>DEMO_QUIZ.map(q=>({answer:q.answer,fact:q.fact}));
+  // Preview round times: round 1 opened yesterday, round 2 a week after, round 3 two weeks after
+  const DAY=86400e3, opensAt=n=>db.flags.allRounds?0:(db.created||now)-DAY+(n-1)*7*DAY;
+  const roundRows=n=>DEMO_QUIZ.filter(q=>q.round===n);
+  const myRound=(d,n)=>{ const s=db.scores.find(x=>x.device===d&&(x.round||1)===n); return s?{score:s.score,correct:s.correct,total:s.total}:null; };
+  const review=n=>roundRows(n).map(q=>({answer:q.answer,fact:q.fact}));
   const blessState=()=>({open:true,needsApproval:false,count:db.blessings.length,items:db.blessings.filter(b=>b.isPublic).slice().reverse()});
   const H={
-    quiz:r=>({open:true,seconds:20,questions:DEMO_QUIZ.map(q=>({q:q.q,options:q.options})),done:findScore(r.device),review:findScore(r.device)?review():null}),
+    quiz:r=>({open:true,seconds:20,now:Date.now(),rounds:[1,2,3].map(n=>{ const unlocked=opensAt(n)<=Date.now(), done=myRound(r.device,n);
+      return {n,name:['How it all began','Falling for each other','The proposal'][n-1],opensAt:opensAt(n),unlocked,count:roundRows(n).length,done,
+        questions:unlocked?roundRows(n).map(q=>({q:q.q,options:q.options})):[],review:done&&unlocked?review(n):null}; })}),
     submitQuiz:r=>{
-      const prev=findScore(r.device); if(prev) return {already:true,result:prev,review:review()};
-      let score=0,correct=0;
-      DEMO_QUIZ.forEach((q,i)=>{ if(r.answers[i]===q.answer){ correct++; const t=Math.min(20000,r.times[i]||20000); score+=100+Math.round(50*(1-t/20000)); } });
-      db.scores.push({name:r.name||'Guest',team:r.team||'',score,correct,total:DEMO_QUIZ.length,device:r.device});
-      return {result:{score,correct,total:DEMO_QUIZ.length},review:review()};
+      const n=r.round||1, prev=myRound(r.device,n); if(prev) return {already:true,result:prev,review:review(n)};
+      if(opensAt(n)>Date.now()) throw new Error('This round has not opened yet.');
+      let score=0,correct=0; const qs=roundRows(n);
+      qs.forEach((q,i)=>{ if(r.answers[i]===q.answer){ correct++; const t=Math.min(20000,r.times[i]||20000); score+=100+Math.round(50*(1-t/20000)); } });
+      db.scores.push({name:r.name||'Guest',team:r.team||'',score,correct,total:qs.length,device:r.device,round:n});
+      return {result:{score,correct,total:qs.length},review:review(n)};
     },
     leaderboard:r=>{
-      const all=db.scores.slice().sort((a,b)=>b.score-a.score).map(s=>({name:s.name,team:s.team,score:s.score,correct:s.correct,total:s.total,me:s.device===r.device}));
+      const by={}; db.scores.forEach(s=>{ const p=by[s.device]=by[s.device]||{name:s.name,team:s.team,me:s.device===r.device,score:0,played:0}; p.score+=s.score; p.played++; });
+      const all=Object.values(by).sort((a,b)=>b.score-a.score);
       const teams={Nikita:{players:0,total:0},Ishan:{players:0,total:0}}; all.forEach(p=>{ if(teams[p.team]){ teams[p.team].players++; teams[p.team].total+=p.score; } });
       return {top:all.slice(0,25),players:all.length,teams,myRank:all.findIndex(p=>p.me)+1};
     },
@@ -889,12 +971,13 @@ function renderDemoControls(){
     <div class="row" style="margin-top:8px">
       <button class="btn share" type="button" data-demo="reveal">${f.reveal?'Hide':'Reveal'} song results</button>
       <button class="btn share" type="button" data-demo="resolved">${f.resolved?'Undo':'Enter'} sample prediction results</button>
+      <button class="btn share" type="button" data-demo="allRounds">${f.allRounds?'Lock':'Unlock'} future quiz rounds</button>
       <button class="btn share" type="button" data-demo="reset">Reset preview</button>
     </div>`;
   document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>{
     const a=b.dataset.demo;
-    if(a==='reset'){ demoApi.reset(); store.set('wed_quiz',''); } else demoApi.toggle(a);
-    renderDemoControls(); loaded.quiz=0; loaded.bless=0; route();
+    if(a==='reset'){ demoApi.reset(); [1,2,3].forEach(n=>store.set('wed_quiz_r'+n,'')); } else demoApi.toggle(a);
+    renderDemoControls(); loaded.quiz=0; loaded.bless=0; QZ.rounds=[]; route();
     if(S) loadSongs(false); if(P) loadPredict(false);
   });
 }
