@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nikita &amp; Ishan – Wedding games</title>
-<meta name="description" content="A Kerala backwater quiz, the Sangeet six, wedding predictions and blessings for Nikita and Ishan.">
+<meta name="description" content="A Kerala backwater quiz, the Sangeet ladder, wedding predictions and blessings for Nikita and Ishan.">
 <meta property="og:title" content="Nikita &amp; Ishan – Wedding games">
-<meta property="og:description" content="Take the backwater quiz, pick your Sangeet six, make your wedding predictions and leave a blessing.">
+<meta property="og:description" content="Take the backwater quiz, pick your Sangeet favourites, make your wedding predictions and leave a blessing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Rozha+One&display=swap" rel="stylesheet">
@@ -139,7 +139,7 @@ ol.lb .rk{font:400 18px "Rozha One",Georgia,serif;color:var(--muted);text-align:
 ol.lb li:nth-child(-n+3) .rk{color:var(--gold)}
 ol.lb .sc{font-weight:700}
 
-/* Sangeet six */
+/* Sangeet ladder */
 .slots{display:grid;gap:7px;margin:10px 0}
 .slot{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;min-height:54px;padding:6px 6px 6px 4px;border-radius:10px;border:1.5px solid var(--line);background:var(--page)}
 .slot .n{font:400 18px "Rozha One",Georgia,serif;color:var(--gold);text-align:center}
@@ -148,23 +148,38 @@ ol.lb .sc{font-weight:700}
 .slot .x:hover{color:var(--bad)}
 .status{font-weight:700;margin:4px 0}
 .status.ok{color:var(--ok)}
-details.card summary{cursor:pointer;list-style-position:outside}
 ol.songs{list-style:none;margin:10px 0 0;padding:0}
-ol.songs li{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line)}
-ol.songs li.nork{grid-template-columns:1fr auto}
-ol.songs li.flash{animation:flash 1.6s}
-@keyframes flash{0%,60%{background:color-mix(in srgb,var(--gold) 30%,transparent)}100%{background:transparent}}
-ol.songs .rk{font:400 20px "Rozha One",Georgia,serif;color:var(--muted);text-align:center}
-ol.songs li.top .rk{color:var(--gold)}
+ol.songs li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line)}
+ol.songs li.picked{background:color-mix(in srgb,var(--gold) 10%,transparent)}
 .song-t{font-weight:700;line-height:1.3}
 .song-a{font-size:14px;color:var(--muted)}
 .badge{display:inline-block;vertical-align:middle;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--gold);color:#1b1708;margin-left:6px}
 .badge.mine{background:transparent;border:1px solid var(--gold);color:var(--ink)}
-.pickbtn{min-width:88px;min-height:44px;font:inherit;font-weight:700;font-size:15px;border:2px solid var(--line);border-radius:10px;background:var(--page);color:var(--ink);cursor:pointer}
+.pickbtn{min-width:104px;min-height:44px;font:inherit;font-weight:700;font-size:15px;border:2px solid var(--line);border-radius:10px;background:var(--page);color:var(--ink);cursor:pointer}
 .pickbtn.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 24%,var(--page))}
 .pickbtn:disabled{opacity:.4;cursor:default}
 .pickbtn:focus-visible,.popt:focus-visible,.slot .x:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .picks{font-weight:700;font-size:14px;color:var(--muted);text-align:right;white-space:nowrap}
+.ladder-locked{text-align:center;border-style:dashed}
+.ladder-locked .lock{font-size:30px;line-height:1;margin-bottom:6px}
+ol.ladder{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ol.ladder li{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 10px 10px 6px;border-radius:12px;background:var(--page);border:1.5px solid var(--line);will-change:transform}
+ol.ladder li:first-child{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+ol.ladder li.mine{background:color-mix(in srgb,var(--gold) 14%,var(--page))}
+ol.ladder .rk{font:400 24px "Rozha One",Georgia,serif;color:var(--gold);text-align:center}
+.lbody{min-width:0}
+.bar{height:8px;border-radius:4px;background:var(--line);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#b8902f,var(--gold));transition:width .8s ease}
+.votes{font-weight:700;font-size:18px;text-align:right;line-height:1}
+.votes small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.climb{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:var(--ok);vertical-align:middle}
+.climb.new{color:#1b1708;background:var(--gold);padding:1px 7px;border-radius:999px}
+@media (prefers-reduced-motion:no-preference){
+  ol.ladder li.is-new{animation:popIn .6s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes popIn{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+  .climb{animation:climbFade 3s ease forwards}
+  @keyframes climbFade{0%,70%{opacity:1}100%{opacity:.35}}
+}
 
 /* Predictions */
 .chart{display:block;width:100%;height:auto;margin:8px 0 12px}
@@ -257,7 +272,7 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
 <nav class="tabs" aria-label="Activities"><div class="wrap">
   <a href="#home" data-v="home">Home</a>
   <a href="#quiz" data-v="quiz">Backwater quiz</a>
-  <a href="#songs" data-v="songs">Sangeet six</a>
+  <a href="#songs" data-v="songs">Sangeet ladder</a>
   <a href="#predict" data-v="predict">Predictions</a>
   <a href="#blessings" data-v="blessings">Blessings</a>
 </div></nav>
@@ -273,9 +288,9 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
       <div class="go">Board the houseboat</div>
     </div></a>
     <a class="tile" href="#songs"><div class="card kasavu">
-      <h3>The Sangeet six</h3>
-      <p>Pick the six songs you think everyone else will pick. The most popular six go to the DJ, and whoever matches them best wins.</p>
-      <div class="go">Pick your six</div>
+      <h3>The Sangeet ladder</h3>
+      <p>Pick your three favourites from our 20-song shortlist, then watch the live top 5 as songs climb the ladder.</p>
+      <div class="go">Pick your favourites</div>
     </div></a>
     <a class="tile" href="#predict"><div class="card kasavu">
       <h3>Wedding predictions</h3>
@@ -296,8 +311,8 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
   </section>
 
   <section class="view" id="v-songs">
-    <div class="row" style="justify-content:space-between"><h2>The Sangeet six</h2><a class="btn share" data-share="songs" target="_blank" rel="noopener">Share on WhatsApp</a></div>
-    <p>Pick the six songs you think <em>everyone else</em> will pick. Nobody can see what's popular until the reveal at the Sangeet. Then the six most-picked songs become the official Sangeet six, and whoever matched them best wins. Ties go to whoever locked in first.</p>
+    <div class="row" style="justify-content:space-between"><h2>The Sangeet ladder</h2><a class="btn share" data-share="songs" target="_blank" rel="noopener">Share on WhatsApp</a></div>
+    <p>We've picked 20 songs for the Sangeet. Choose up to three you'd most love to dance to. Once you've voted, you'll see the live top 5, and which songs are climbing.</p>
     <div id="songsBox"></div>
   </section>
 
@@ -340,7 +355,7 @@ footer button{background:none;border:none;font:inherit;color:inherit;text-decora
    SETTINGS – the only part you need to edit
    ===================================================================== */
 const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycbyUR6-IERxPaFRnaJGeTLtLyxCxI54nOg6ZdJkLUoyXRf0uaQ6PgC7Gv82UFlF4pdxr/exec',       // paste your Google Apps Script web app URL here (ends in /exec)
+  API_URL: 'https://script.google.com/macros/s/AKfycbwDysqnqtrtJ51eS01eP-rOdduneLsozvcDfvI4JWQu20Dpth8Jz5cb4cy7UzGMuXjI/exec',       // paste your Google Apps Script web app URL here (ends in /exec)
   SITE_URL: 'https://ishan-suthar.github.io/wedding-games/',      // optional: your GitHub Pages link, used in WhatsApp share messages
   BRIDE: 'Nikita',
   GROOM: 'Ishan',
@@ -601,93 +616,100 @@ async function renderLeaderboard(){
 }
 
 /* =====================================================================
-   SANGEET SIX: pick a lineup, match the crowd
+   SANGEET LADDER: pick up to 3 favourites, then watch the top 5 move
    ===================================================================== */
-let S=null, songQuery='', pendingPicks=null, saving=false;
+let S=null, pendingPicks=null, saving=false;
+const ladderMemory={ranks:{}};                       // last ranks seen, to show songs climbing
 const NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
 const numWord=n=>NUM[n]||String(n);
-const fmtTime=t=>new Date(t).toLocaleString(undefined,{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
 async function loadSongs(first){
   const box=$('#songsBox'); if(first) box.innerHTML=loading('Tuning the dhol…');
   try{ const r=await api('songs'); if(!saving&&!pendingPicks){ S=r; renderSongs(); } }
   catch(e){ if(first) errorCard(box,e,()=>loadSongs(true)); else toast(e.message); }
 }
-function statusText(){
+function favStatus(){
   const n=S.myPicks.length, size=S.size;
   if(saving||pendingPicks) return 'Saving…';
-  if(n>=size) return S.lockedAt?`Locked in ${fmtTime(S.lockedAt)}.${S.open?' Changing a song resets your lock-in time.':''}`:'Locked in.';
-  if(S.open) return n?`Pick ${size-n} more to enter.`:`Pick ${numWord(size)} songs to enter.`;
-  return "Your lineup wasn't complete when the battle closed, so it isn't in the running.";
+  if(!S.open) return n?'Voting has closed. These were your picks.':'Voting has closed.';
+  if(!n) return `Tap up to ${numWord(size)} songs you can't wait to dance to.`;
+  if(n<size) return `${n} of ${size} picked. You can add ${size-n===1?'one more':numWord(size-n)+' more'}, or change your mind any time.`;
+  return `All ${numWord(size)} picked! Tap the × on a song to swap it.`;
 }
 function renderSongs(){
-  const size=S.size, mine=S.myPicks, byId=Object.fromEntries(S.songs.map(s=>[s.id,s]));
-  let h=S.reveal?songResultsHTML():'';
-  h+=`<div class="card kasavu">
-    <h3>Your Sangeet ${numWord(size)}</h3>
+  // remember where each ladder row was, so moves can be animated after re-render
+  const before={}; document.querySelectorAll('#ladder li[data-id]').forEach(li=>before[li.dataset.id]=li.getBoundingClientRect().top);
+  const size=S.size, mine=S.myPicks, byId=Object.fromEntries(S.songs.map(s=>[s.id,s])), full=mine.length>=size;
+  let h=`<div class="card kasavu">
+    <h3>Your favourites</h3>
     <div class="slots">${Array.from({length:size},(_,i)=>{ const s=byId[mine[i]];
       return s?`<div class="slot"><span class="n">${i+1}</span><div><div class="song-t">${esc(s.title)}</div>${s.artist?`<div class="song-a">${esc(s.artist)}</div>`:''}</div>${S.open?`<button class="x" type="button" data-rm="${esc(s.id)}" aria-label="Remove ${esc(s.title)}">×</button>`:'<span></span>'}</div>`
-        :`<div class="slot empty"><span class="n">${i+1}</span><span>${S.open?'Pick a song from the list below':'Empty'}</span><span></span></div>`; }).join('')}</div>
-    <p class="status ${mine.length>=size&&!saving?'ok':''}" id="lineupStatus">${esc(statusText())}</p>
-    <p class="small" style="margin:0">${S.entries} ${S.entries===1?'guest has':'guests have'} entered a full lineup.</p>
+        :`<div class="slot empty"><span class="n">${i+1}</span><span>${S.open?'Pick a song below':'Empty'}</span><span></span></div>`; }).join('')}</div>
+    <p class="status ${mine.length&&!saving?'ok':''}" id="favStatus">${esc(favStatus())}</p>
   </div>`;
-  if(S.open) h+=`<details class="card"><summary><h3 style="display:inline">Can't find your song? Add it</h3></summary>
-      <label for="sTitle">Song</label><input type="text" id="sTitle" maxlength="80" placeholder="e.g. London Thumakda">
-      <label for="sArtist">Film or artist <span class="opt-l">(optional)</span></label><input type="text" id="sArtist" maxlength="80" placeholder="e.g. Queen">
-      <button class="btn primary wide" type="button" id="sAdd" style="margin-top:14px">Add to the list</button>
-      <p class="small" style="margin:8px 0 0">You can add up to ${S.maxSuggestions} songs. You've added ${S.mySuggestions}.</p>
-    </details>`;
-  else if(!S.reveal) h+=`<div class="card"><h3>Lineups are locked</h3><p>The official Sangeet ${numWord(size)} will be revealed at the Sangeet!</p></div>`;
-  h+=`<h3 style="margin-top:22px">${S.reveal?'Every song, by picks':'All songs'}</h3>
-    <div class="row"><input type="search" id="sSearch" placeholder="Search songs" value="${esc(songQuery)}" style="flex:1;margin:0" aria-label="Search songs"><button class="btn share" type="button" id="sRefresh">Refresh</button></div>
-    <ol class="songs" id="songList"></ol>`;
+  h+=ladderHTML();
+  h+=`<h3 style="margin-top:22px">The shortlist</h3>
+    <p class="small">${S.songs.length} songs picked by ${esc(CONFIG.BRIDE)} and ${esc(CONFIG.GROOM)}.</p>
+    <ol class="songs" id="songList">${S.songs.map(s=>{ const on=mine.includes(s.id);
+      return `<li data-id="${esc(s.id)}" class="nork ${on?'picked':''}">
+        <div><div class="song-t">${esc(s.title)}</div>${s.artist?`<div class="song-a">${esc(s.artist)}</div>`:''}</div>
+        ${S.open?`<button class="pickbtn ${on?'on':''}" type="button" data-id="${esc(s.id)}" ${!on&&full?'disabled':''} aria-pressed="${on}">${on?'♥ Favourite':'♡ Pick'}</button>`:(on?'<span class="picks">Your pick</span>':'<span></span>')}
+      </li>`; }).join('')}</ol>`;
   $('#songsBox').innerHTML=h;
-  renderSongList();
   document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>togglePick(b.dataset.rm));
-  $('#sSearch').oninput=e=>{ songQuery=e.target.value; renderSongList(); };
-  $('#sRefresh').onclick=()=>loadSongs(false);
-  if(S.open){ $('#sAdd').onclick=addSong; $('#sTitle').onkeydown=$('#sArtist').onkeydown=e=>{ if(e.key==='Enter') addSong(); }; }
-}
-function renderSongList(flashId){
-  const q=songQuery.trim().toLowerCase(), mine=new Set(S.myPicks), full=S.myPicks.length>=S.size, top=new Set(S.topIds||[]);
-  const list=S.songs.map((s,k)=>({...s,rank:k+1})).filter(s=>!q||(s.title+' '+s.artist).toLowerCase().includes(q));
-  $('#songList').innerHTML=list.length?list.map(s=>{ const on=mine.has(s.id);
-    const right=S.reveal?`<span class="picks">${s.picks} ${s.picks===1?'pick':'picks'}</span>`
-      :S.open?`<button class="pickbtn ${on?'on':''}" type="button" data-id="${esc(s.id)}" ${!on&&full?'disabled':''} aria-pressed="${on}">${on?'✓ Picked':'+ Pick'}</button>`
-      :(on?'<span class="picks">Your pick</span>':'<span></span>');
-    return `<li data-id="${esc(s.id)}" class="${S.reveal?'':'nork'} ${top.has(s.id)?'top':''} ${s.id===flashId?'flash':''}">
-      ${S.reveal?`<span class="rk">${s.rank}</span>`:''}
-      <div><div class="song-t">${esc(s.title)}${top.has(s.id)?'<span class="badge">Top</span>':''}${S.reveal&&on?'<span class="badge mine">Yours</span>':''}</div><div class="song-a">${s.artist?esc(s.artist)+', ':''}${s.team?`<span class="dot ${esc(s.team)}"></span>`:''}added by ${esc(s.by)}</div></div>
-      ${right}</li>`; }).join('')
-    :`<li style="display:block">${S.songs.length?'No songs match your search.':'No songs yet. Add the first one!'}</li>`;
   document.querySelectorAll('#songList .pickbtn').forEach(b=>b.onclick=()=>togglePick(b.dataset.id));
-  if(full&&S.open&&!q&&!flashId) {} // keep quiet
-  if(flashId){ const li=document.querySelector(`#songList li[data-id="${CSS.escape(flashId)}"]`); if(li) li.scrollIntoView({block:'center',behavior:'smooth'}); }
+  const rf=$('#ladderRefresh'); if(rf) rf.onclick=()=>loadSongs(false);
+  animateLadder(before);
 }
-function songResultsHTML(){
-  const top=S.songs.filter(s=>S.topIds.includes(s.id)), me=S.myResult, size=S.size;
-  return `<div class="card kasavu">
-      <h3>The official Sangeet ${numWord(size)}</h3>
-      <p class="small">The songs picked most often across ${S.players} ${S.players===1?'lineup':'lineups'}.${top.length>size?' Some songs tied for the last spot, so they all count.':''}</p>
-      ${top.length?`<ol class="lb">${top.map((s,k)=>`<li class="${S.myPicks.includes(s.id)?'me':''}"><span class="rk">${k+1}</span><span><strong>${esc(s.title)}</strong>${s.artist?`<div class="small">${esc(s.artist)}</div>`:''}</span><span class="sc">${s.picks}</span></li>`).join('')}</ol>`:'<p>No lineups were entered.</p>'}
-    </div>
-    <div class="card">
-      <h3>Lineup leaderboard</h3>
-      ${me?`<p>You matched <strong>${me.matches} of ${size}</strong> and finished <strong>#${me.rank}</strong> of ${S.players}.</p>`:''}
-      ${S.board.length?`<ol class="lb">${S.board.map(p=>`<li class="${p.me?'me':''}"><span class="rk">${p.rank}</span><span>${p.team?`<span class="dot ${esc(p.team)}"></span>`:''}${esc(p.name)}${p.me?' (you)':''}<div class="small">${p.points} popularity points</div></span><span class="sc">${p.matches}/${size}</span></li>`).join('')}</ol>`:''}
-      <p class="small" style="margin-top:10px">Ranked by songs matched, then by how popular all your picks were, then by who locked in first.</p>
+function ladderHTML(){
+  if(!S.ladder){
+    return `<div class="card ladder-locked">
+      <div class="lock" aria-hidden="true">🔒</div>
+      <h3>The Sangeet ladder</h3>
+      <p>Pick at least one favourite to unlock the live top ${S.ladderSize}, and see which songs are climbing.</p>
+      ${S.voters?`<p class="small">${S.voters} ${S.voters===1?'guest has':'guests have'} voted so far.</p>`:''}
     </div>`;
+  }
+  const max=Math.max(1,...S.ladder.map(s=>s.picks));
+  const rows=S.ladder.map(s=>{
+    const prev=ladderMemory.ranks[s.id], moved=prev&&prev>s.rank?prev-s.rank:0, isNew=Object.keys(ladderMemory.ranks).length&&!prev;
+    return `<li data-id="${esc(s.id)}" class="${S.myPicks.includes(s.id)?'mine':''} ${isNew?'is-new':''}">
+      <span class="rk">${s.rank}</span>
+      <div class="lbody">
+        <div class="song-t">${esc(s.title)}${S.myPicks.includes(s.id)?'<span class="badge mine">Your pick</span>':''}${moved?`<span class="climb" aria-label="up ${moved}">▲ ${moved}</span>`:''}${isNew?'<span class="climb new">New!</span>':''}</div>
+        <div class="bar"><i style="width:${Math.round(s.picks/max*100)}%"></i></div>
+      </div>
+      <span class="votes">${s.picks}<small>${s.picks===1?'vote':'votes'}</small></span>
+    </li>`; }).join('');
+  return `<div class="card kasavu ladder-card">
+    <div class="row" style="justify-content:space-between"><h3 style="margin:0">The Sangeet ladder</h3><button class="btn share" type="button" id="ladderRefresh">Refresh</button></div>
+    <p class="small" style="margin:4px 0 10px">Live top ${S.ladderSize} from ${S.voters} ${S.voters===1?'guest':'guests'}. It updates as more votes come in.</p>
+    ${S.ladder.length?`<ol class="ladder" id="ladder">${rows}</ol>`:'<p>No votes yet.</p>'}
+  </div>`;
+}
+/* Slide rows from their old place to their new place, and pop in songs that just entered the top 5 */
+function animateLadder(before){
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('#ladder li[data-id]').forEach(li=>{
+    const old=before[li.dataset.id];
+    if(old!==undefined&&!reduce){
+      const dy=old-li.getBoundingClientRect().top;
+      if(Math.abs(dy)>1){ li.style.transform=`translateY(${dy}px)`; li.style.transition='none';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{ li.style.transition='transform .7s cubic-bezier(.2,.8,.2,1)'; li.style.transform=''; })); }
+    }
+  });
+  if(S.ladder){ ladderMemory.ranks={}; S.ladder.forEach(s=>ladderMemory.ranks[s.id]=s.rank); }
 }
 function togglePick(id){
   if(!S.open) return;
   needProfile(()=>{
     const cur=S.myPicks.slice(), i=cur.indexOf(id);
     if(i>=0) cur.splice(i,1);
-    else{ if(cur.length>=S.size){ toast('Your lineup is full. Remove a song first.'); return; } cur.push(id); }
+    else{ if(cur.length>=S.size){ toast(`You've picked ${numWord(S.size)} already. Remove one to swap it.`); return; } cur.push(id); }
     setPicks(cur);
   });
 }
-function setPicks(p){ const wasFull=S.myPicks.length>=S.size; S.myPicks=p; S.lockedAt=null; pendingPicks=p; renderSongs(); flushPicks(wasFull); }
-async function flushPicks(wasFull){
+function setPicks(p){ const hadVoted=S.myPicks.length>0; S.myPicks=p; pendingPicks=p; renderSongs(); flushPicks(hadVoted); }
+async function flushPicks(hadVoted){
   if(saving) return; saving=true;
   while(pendingPicks){
     const p=pendingPicks; pendingPicks=null; const prof=getProfile()||{};
@@ -695,23 +717,9 @@ async function flushPicks(wasFull){
     catch(e){ toast(e.message); pendingPicks=null; saving=false; await loadSongs(false); return; }
   }
   saving=false; renderSongs();
-  if(!wasFull&&S.myPicks.length>=S.size) toast(`Your Sangeet ${numWord(S.size)} is locked in! 🪔`);
+  if(!hadVoted&&S.myPicks.length&&S.ladder){ toast('Vote counted! The ladder is unlocked 🪔'); const l=document.querySelector('.ladder-card'); if(l) l.scrollIntoView({behavior:'smooth',block:'center'}); }
 }
-function addSong(){
-  const title=$('#sTitle').value.trim(), artist=$('#sArtist').value.trim();
-  if(!title){ toast('Add the name of the song first.'); $('#sTitle').focus(); return; }
-  needProfile(async p=>{
-    const b=$('#sAdd'); b.disabled=true; b.textContent='Adding…';
-    try{
-      const r=await api('suggestSong',{title,artist,name:p.name,team:p.team}); S=r; songQuery='';
-      const id=r.duplicate||r.added;
-      if(!r.duplicate&&S.myPicks.length<S.size){ setPicks([...S.myPicks,id]); toast('Added to the list and to your lineup!'); }
-      else{ renderSongs(); toast(r.duplicate?"That song is already on the list. Here it is!":'Added to the list!'); }
-      renderSongList(id);
-    }catch(e){ toast(e.message); b.disabled=false; b.textContent='Add to the list'; }
-  });
-}
-setInterval(()=>{ if(location.hash==='#songs'&&S&&document.visibilityState==='visible'&&!document.activeElement.matches('input')) loadSongs(false); },45000);
+setInterval(()=>{ if(location.hash==='#songs'&&S&&S.ladder&&document.visibilityState==='visible'&&!saving) loadSongs(false); },20000);
 
 /* =====================================================================
    WEDDING PREDICTIONS: a tiny prediction market
@@ -829,7 +837,7 @@ function renderWall(r){
 /* ---------- Share links & countdown ---------- */
 const SHARE={
   quiz:`How well do you know ${COUPLE}? Take the backwater quiz and get on the leaderboard: ${siteURL()}#quiz`,
-  songs:`Think you know what everyone will dance to? Pick your Sangeet six for ${COUPLE} and see if you match the crowd: ${siteURL()}#songs`,
+  songs:`Which songs will top the Sangeet ladder? Pick your 3 favourites for ${COUPLE} and watch the live top 5: ${siteURL()}#songs`,
   predict:`Who will cry first at ${COUPLE}'s wedding? Make your predictions and watch the odds move: ${siteURL()}#predict`,
   blessings:`Leave a blessing or your best marriage advice for ${COUPLE}: ${siteURL()}#blessings`,
 };
@@ -843,7 +851,7 @@ document.querySelectorAll('[data-share]').forEach(a=>a.href=wa(SHARE[a.dataset.s
    PREVIEW MODE – runs when API_URL is empty. Mirrors the real server.
    ===================================================================== */
 function makeDemo(){
-  const KEY='wed_demo_db3', HOUR=3600e3, now=Date.now();
+  const KEY='wed_demo_db4', HOUR=3600e3, now=Date.now();
   const DEMO_PRED=[
     {id:'p1',q:'Who will get emotional first?',options:['Nikita','Ishan','The parents','All of us!'],outcome:2},
     {id:'p2',q:'Who will be the last one on the dance floor?',options:['Team Bride','Team Groom','The couple','The parents!'],outcome:-1},
@@ -855,10 +863,10 @@ function makeDemo(){
   const choose=w=>{ let r=rnd()*w.reduce((a,b)=>a+b,0); for(let i=0;i<w.length;i++){ if((r-=w[i])<=0) return i; } return w.length-1; };
   const NAMES=['Ammu','Unni','Kunjan','Chinnu','Appu','Kichu','Meenu','Tinku','Sonu','Pinky','Bablu','Guddu','Rinku','Chotu','Mithu','Laddu','Gudiya','Bunty','Tuktuk','Golu'];
   function seedDb(){
-    const songs=[['London Thumakda','Queen'],['Jimikki Kammal','Velipadinte Pusthakam'],['Gallan Goodiyaan','Dil Dhadakne Do'],['Kala Chashma','Baar Baar Dekho'],['Nachde Ne Saare','Baar Baar Dekho'],['Badtameez Dil','Yeh Jawaani Hai Deewani'],['Gal Mitthi Mitthi','Aisha'],['Tunak Tunak Tun','Daler Mehndi'],['Malhari','Bajirao Mastani'],['Kudi Nu Nachne De','Angrezi Medium']]
-      .map(([title,artist],i)=>({id:'x'+i,title,artist,by:NAMES[i],team:i%2?'Ishan':'Nikita',device:'d'+i,time:now-(120-i)*HOUR}));
-    const pop=[9,7,8,6,5,6,3,4,2,3];
-    const lineups=NAMES.slice(0,16).map((name,i)=>{ const ids=new Set(); while(ids.size<6) ids.add('x'+choose(pop.map((w,k)=>ids.has('x'+k)?0:w))); return {device:'d'+i,name,team:i%2?'Ishan':'Nikita',ids:[...ids],time:now-(100-i*5)*HOUR}; });
+    const songs=[["What Jhumka?","Rocky Aur Rani Kii Prem Kahaani"],["Tauba Tauba","Bad Newz"],["Aaj Ki Raat","Stree 2"],["Aayi Nai","Stree 2"],["Taras","Munjya"],["Jhoome Jo Pathaan","Pathaan"],["Kar Gayi Chull","Kapoor & Sons"],["Garmi","Street Dancer 3D"],["Gallan Goodiyaan","Dil Dhadakne Do"],["Tareefan","Veere Di Wedding"],["Cutiepie","Ae Dil Hai Mushkil"],["Bom Diggy Diggy","Sonu Ke Titu Ki Sweety"],["Morni Banke","Badhaai Ho"],["Sweety Tera Drama","Bareilly Ki Barfi"],["London Thumakda","Queen"],["Badtameez Dil","Yeh Jawaani Hai Deewani"],["Nachde Ne Saare","Baar Baar Dekho"],["Kala Chashma","Baar Baar Dekho"],["Desi Girl","Dostana"],["Bole Chudiyan","Kabhi Khushi Kabhie Gham"]]
+      .map(([title,artist],i)=>({id:'s'+String(i+1).padStart(2,'0'),title,artist}));
+    const pop=[9,8,7,5,3,6,8,4,7,4,3,5,4,3,8,6,6,5,4,5];
+    const lineups=NAMES.slice(0,14).map((name,i)=>{ const k=1+Math.floor(rnd()*3), ids=new Set(); while(ids.size<k) ids.add(songs[choose(pop.map((w,j)=>ids.has(songs[j].id)?0:w))].id); return {device:'d'+i,name,team:i%2?'Ishan':'Nikita',ids:[...ids],time:now-(100-i*5)*HOUR}; });
     const picks=[];
     const bias={p1:[2,3,5,3],p2:[4,4,2,3],p3:[3,6],p4:[4,5],p5:[2,5]};
     DEMO_PRED.forEach(q=>{ NAMES.forEach((name,i)=>{ if(rnd()<.25) return; const t=now-(130-i*6-rnd()*8)*HOUR; picks.push({time:t,name,team:i%2?'Ishan':'Nikita',qid:q.id,pick:choose(bias[q.id]),device:'d'+i}); }); });
@@ -889,16 +897,15 @@ function makeDemo(){
     return {open:true,weight:W,questions,leaders:Object.values(scores).sort((a,b)=>b.points-a.points||b.correct-a.correct).slice(0,25),resolved:questions.filter(q=>q.outcome>=0).length};
   }
   function songState(device){
-    const size=6, songs=db.songs.map(s=>({id:s.id,title:s.title,artist:s.artist,by:s.by,team:s.team})).sort((a,b)=>a.title.localeCompare(b.title));
-    const mine=db.lineups.find(l=>l.device===device);
-    const out={open:!db.flags.reveal,reveal:db.flags.reveal,size,maxSuggestions:5,mySuggestions:db.songs.filter(s=>s.device===device).length,myPicks:mine?mine.ids:[],lockedAt:mine&&mine.ids.length>=size?mine.time:null,entries:db.lineups.filter(l=>l.ids.length>=size).length,songs};
-    if(db.flags.reveal){
-      const counts={}; db.lineups.forEach(l=>l.ids.forEach(id=>counts[id]=(counts[id]||0)+1));
-      const ranked=songs.map(s=>({...s,picks:counts[s.id]||0})).sort((a,b)=>b.picks-a.picks||a.title.localeCompare(b.title));
-      const cutoff=ranked.length>=size?ranked[size-1].picks:1, topIds=ranked.filter(s=>s.picks>0&&s.picks>=cutoff).map(s=>s.id), top=new Set(topIds);
-      const players=db.lineups.filter(l=>l.ids.length>=size).map(l=>({name:l.name,team:l.team,me:l.device===device,locked:l.time,matches:l.ids.filter(id=>top.has(id)).length,points:l.ids.reduce((a,id)=>a+(counts[id]||0),0)})).sort((a,b)=>b.matches-a.matches||b.points-a.points||a.locked-b.locked);
-      players.forEach((p,i)=>p.rank=i+1);
-      Object.assign(out,{songs:ranked,topIds,board:players.slice(0,25),myResult:players.find(p=>p.me)||null,players:players.length});
+    const size=3, ladderSize=5, closed=db.flags.reveal, songs=db.songs.map(s=>({id:s.id,title:s.title,artist:s.artist}));
+    // preview only: now and then a sample guest votes, so you can watch the ladder move
+    if(Math.random()<.5){ const d='d'+(20+Math.floor(Math.random()*30)); let l=db.lineups.find(x=>x.device===d); const pick=songs[Math.floor(Math.random()*songs.length)].id;
+      if(!l){ l={device:d,name:'Guest',team:'',ids:[],time:Date.now()}; db.lineups.push(l); } if(l.ids.length<3&&!l.ids.includes(pick)) l.ids.push(pick); }
+    const voters=db.lineups.filter(l=>l.ids.length), mine=db.lineups.find(l=>l.device===device), myPicks=mine?mine.ids:[];
+    const out={open:!closed,size,songs,myPicks,voters:voters.length,ladderSize};
+    if(myPicks.length||closed){
+      const counts={}; voters.forEach(l=>l.ids.forEach(id=>counts[id]=(counts[id]||0)+1));
+      out.ladder=songs.map((s,i)=>({...s,picks:counts[s.id]||0,o:i})).filter(s=>s.picks).sort((a,b)=>b.picks-a.picks||a.o-b.o).slice(0,ladderSize).map((s,i)=>({id:s.id,title:s.title,artist:s.artist,picks:s.picks,rank:i+1}));
     }
     return out;
   }
@@ -930,20 +937,12 @@ function makeDemo(){
       return {top:all.slice(0,25),players:all.length,teams,myRank:all.findIndex(p=>p.me)+1};
     },
     songs:r=>songState(r.device),
-    suggestSong:r=>{
-      if(db.flags.reveal) throw new Error('The song battle has closed.');
-      const title=String(r.title||'').trim().slice(0,80); if(!title) throw new Error('Add the name of the song.');
-      const dup=db.songs.find(s=>key(s.title)===key(title)); if(dup) return {...songState(r.device),duplicate:dup.id};
-      if(db.songs.filter(s=>s.device===r.device).length>=5) throw new Error("You've added 5 songs already. Pick your six from the list!");
-      const id='s'+Date.now().toString(36); db.songs.push({id,title,artist:String(r.artist||'').slice(0,80),by:r.name||'Guest',team:r.team||'',device:r.device,time:Date.now()});
-      return {...songState(r.device),added:id};
-    },
     saveLineup:r=>{
-      if(db.flags.reveal) throw new Error('Lineups are locked.');
+      if(db.flags.reveal) throw new Error('Voting has closed.');
       const ids=new Set(db.songs.map(s=>s.id)), picks=[...new Set(r.picks||[])].filter(id=>ids.has(id));
-      if(picks.length>6) throw new Error('Your lineup can only have 6 songs.');
+      if(picks.length>3) throw new Error('You can pick up to 3 favourites.');
       const l=db.lineups.find(x=>x.device===r.device);
-      if(l){ if(l.ids.join()!==picks.join()){ l.ids=picks; l.time=Date.now(); l.name=r.name; l.team=r.team; } }
+      if(l){ l.ids=picks; l.time=Date.now(); l.name=r.name; l.team=r.team; }
       else db.lineups.push({device:r.device,name:r.name||'Guest',team:r.team||'',ids:picks,time:Date.now()});
       return songState(r.device);
     },
@@ -969,7 +968,7 @@ function renderDemoControls(){
   const f=demoApi.flags();
   $('#demoNote').innerHTML=`<strong>Preview mode.</strong> Everything is saved on this device only, with sample guests. Paste your Google Script link into <code>API_URL</code> to go live.
     <div class="row" style="margin-top:8px">
-      <button class="btn share" type="button" data-demo="reveal">${f.reveal?'Hide':'Reveal'} song results</button>
+      <button class="btn share" type="button" data-demo="reveal">${f.reveal?'Reopen':'Close'} song voting</button>
       <button class="btn share" type="button" data-demo="resolved">${f.resolved?'Undo':'Enter'} sample prediction results</button>
       <button class="btn share" type="button" data-demo="allRounds">${f.allRounds?'Lock':'Unlock'} future quiz rounds</button>
       <button class="btn share" type="button" data-demo="reset">Reset preview</button>
